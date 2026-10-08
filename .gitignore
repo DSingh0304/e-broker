@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+
+# Build outputs
+.next/
+dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Data (downloaded/generated, not source)
+dataset/
+data_processed/
+runs/
+*.pt
+!models/*.pt
+
+# Runtime / local state
+logs/
+*.log
+test-results/
+playwright-report/
+.ollama_home/
+*.db
+*.sqlite*
+
+# Secrets (see docs/ENV_SETUP.md)
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

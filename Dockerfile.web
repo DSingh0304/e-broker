@@ -1,0 +1,24 @@
+# Dockerfile.web — Next.js frontend (production).
+FROM node:20-alpine
+
+WORKDIR /app
+
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    PORT=3000 \
+    HOSTNAME=0.0.0.0
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+
+# NEXT_PUBLIC_* values are inlined at build time, so accept them as build args.
+ARG NEXT_PUBLIC_ADMIN_TOKEN=dev-admin-token
+ARG NEXT_PUBLIC_API_URL=""
+ENV NEXT_PUBLIC_ADMIN_TOKEN=$NEXT_PUBLIC_ADMIN_TOKEN \
+    NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+RUN npm run build
+
+EXPOSE 3000
+CMD ["npm", "start"]

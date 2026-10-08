@@ -1,0 +1,95 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ebroker-postgres
+    environment:
+      POSTGRES_DB: ebroker
+      POSTGRES_USER: ebroker
+      POSTGRES_PASSWORD: ebroker_dev_password
+    ports: ["5432:5432"]
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infra/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "ebroker"]
+      interval: 5s
+      retries: 5
+
+  # S3-compatible object storage (Elestio MinIO). boto3 speaks the S3 API
+  # against this endpoint — no AWS service dependency.
+  minio:
+    image: elestio/minio:latest
+    container_name: ebroker-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports: ["9000:9000", "9001:9001"]
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/minio/health/live || exit 1"]
+      interval: 5s
+      retries: 10
+      start_period: 15s
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile.local
+    container_name: ebroker-api
+    ports: ["8000:8000"]
+    volumes:
+      - ./api:/app/api
+      - ./models:/models:ro
+      - ./ml:/app/ml:ro
+    environment:
+      DATABASE_URL: postgresql+asyncpg://ebroker:ebroker_dev_password@postgres:5432/ebroker
+      DATABASE_URL_SYNC: postgresql://ebroker:ebroker_dev_password@postgres:5432/ebroker
+      AWS_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: minioadmin
+      AWS_SECRET_ACCESS_KEY: minioadmin123
+      AWS_DEFAULT_REGION: ap-south-1
+      S3_BUCKET: ebroker-images
+      S3_MODEL_BUCKET: ebroker-models
+      AGENT_PROVIDER: ollama
+      OLLAMA_HOST: http://host.docker.internal:11435
+      OLLAMA_MODEL: gemma4:31b-cloud
+      AGENT_MOCK: "false"
+      AGENT_TIMEOUT_S: "300"
+      MOCK_INFERENCE: "false"
+      ACTIVE_MODEL_PATH: /models/best_yolo26.pt
+      ADMIN_JWT_BYPASS: "true"
+      ADMIN_JWT_BYPASS_TOKEN: dev-admin-token
+      INTERNAL_API_KEY: test-internal-key
+      METALS_API_URL: https://api.metals.dev/v1/latest
+      METALS_API_CURRENCY: INR
+      METALS_API_UNIT: g
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres: { condition: service_healthy }
+      minio: { condition: service_healthy }
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        NEXT_PUBLIC_ADMIN_TOKEN: dev-admin-token
+    container_name: ebroker-web
+    ports: ["3000:3000"]
+    environment:
+      NEXT_PUBLIC_API_URL: ""
+      INTERNAL_API_URL: http://api:8000
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: ebroker-local-dev-secret-change-in-prod
+      ALLOW_DEV_ADMIN: "true"
+      NEXT_PUBLIC_ADMIN_TOKEN: dev-admin-token
+    depends_on: [api]
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  minio-data:
