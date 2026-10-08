@@ -1,0 +1,7 @@
+# api/Dockerfile.admin — same image, different entrypoint role (see SAM template)
+FROM public.ecr.aws/lambda/python:3.12-arm64 AS base
+RUN yum install -y gcc libjpeg-devel zlib-devel && yum clean all
+COPY api/requirements.txt ${LAMBDA_TASK_ROOT}/
+RUN pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt --no-cache-dir
+COPY api ${LAMBDA_TASK_ROOT}/api
+CMD ["api.main.handler"]

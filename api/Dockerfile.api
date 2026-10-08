@@ -1,0 +1,13 @@
+# api/Dockerfile.api — public Lambda (x86_64) + local dev stage
+FROM public.ecr.aws/lambda/python:3.12-x86_64 AS base
+RUN dnf install -y gcc libjpeg-devel zlib-devel && dnf clean all
+COPY api/requirements.txt ${LAMBDA_TASK_ROOT}/
+RUN pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt --no-cache-dir
+COPY api ${LAMBDA_TASK_ROOT}/api
+COPY models/best.pt /models/best.pt
+CMD ["api.main.handler"]
+
+FROM base AS dev
+RUN pip install uvicorn --no-cache-dir
+WORKDIR /app
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
