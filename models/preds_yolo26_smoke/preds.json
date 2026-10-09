@@ -1,0 +1,85 @@
+[
+ {
+  "image": "balanced_ewaste_test_11_jpg.rf.7c070e341797d8c9c1d391d880c74852.jpg",
+  "detections": [
+   {
+    "class": "peripheral_other",
+    "conf": 0.333,
+    "box": [
+     46.7,
+     71.3,
+     634.8,
+     610.9
+    ]
+   }
+  ],
+  "annotated": "models/preds_yolo26_smoke/pred_balanced_ewaste_test_11_jpg.rf.7c070e341797d8c9c1d391d880c74852.jpg"
+ },
+ {
+  "image": "balanced_ewaste_test_10-removebg-preview_png.rf.5f7c8a6923d5bad894e8c9f345e1d5ad.jpg",
+  "detections": [
+   {
+    "class": "peripheral_other",
+    "conf": 0.588,
+    "box": [
+     215.4,
+     157.4,
+     422.7,
+     490.0
+    ]
+   },
+   {
+    "class": "battery",
+    "conf": 0.495,
+    "box": [
+     212.5,
+     147.5,
+     422.7,
+     510.0
+    ]
+   }
+  ],
+  "annotated": "models/preds_yolo26_smoke/pred_balanced_ewaste_test_10-removebg-preview_png.rf.5f7c8a6923d5bad894e8c9f345e1d5ad.jpg"
+ },
+ {
+  "image": "balanced_ewaste_test_013113smartphonescreens10_jpg.rf.309ef724997acf9d6e9ca4b2bb71d2fc.jpg",
+  "detections": [
+   {
+    "class": "peripheral_other",
+    "conf": 0.328,
+    "box": [
+     180.6,
+     230.1,
+     458.1,
+     541.8
+    ]
+   },
+   {
+    "class": "peripheral_other",
+    "conf": 0.32,
+    "box": [
+     182.2,
+     95.8,
+     429.6,
+     533.4
+    ]
+   },
+   {
+    "class": "peripheral_other",
+    "conf": 0.195,
+    "box": [
+     205.1,
+     322.3,
+     439.9,
+     541.4
+    ]
+   }
+  ],
+  "annotated": "models/preds_yolo26_smoke/pred_balanced_ewaste_test_013113smartphonescreens10_jpg.rf.309ef724997acf9d6e9ca4b2bb71d2fc.jpg"
+ },
+ {
+  "image": "pc_parts_test_101_jpg.rf.5995146535584f2ecd8fa8d839391b83.jpg",
+  "detections": [],
+  "annotated": "models/preds_yolo26_smoke/pred_pc_parts_test_101_jpg.rf.5995146535584f2ecd8fa8d839391b83.jpg"
+ }
+]

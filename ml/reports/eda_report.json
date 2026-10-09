@@ -1,0 +1,1249 @@
+{
+  "sources": {
+    "trcproject": {
+      "classes": [
+        "9V Battery",
+        "Battery",
+        "HDD",
+        "Keyboard",
+        "NetworkSwitch",
+        "Printed Circuit Board PCB",
+        "Remote control",
+        "Router",
+        "Smart Phone",
+        "USB Flash Drive",
+        "cable",
+        "computer mouse",
+        "internal HDD"
+      ],
+      "splits": {
+        "train": {
+          "images": 1184,
+          "labels": 1184,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 1184,
+          "empty_label_files": 6,
+          "instances": 1299,
+          "format": {
+            "polygon_seg": 1299
+          },
+          "per_class": {
+            "0": 106,
+            "1": 131,
+            "2": 99,
+            "3": 92,
+            "4": 92,
+            "5": 50,
+            "6": 105,
+            "7": 93,
+            "8": 104,
+            "9": 129,
+            "10": 98,
+            "11": 98,
+            "12": 102
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 1184,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 184,
+            "width_max": 3000,
+            "height_min": 168,
+            "height_max": 3000,
+            "uniform_size": false,
+            "most_common_size": [
+              [
+                [
+                  225,
+                  225
+                ],
+                33
+              ],
+              [
+                [
+                  1000,
+                  1000
+                ],
+                8
+              ],
+              [
+                [
+                  500,
+                  500
+                ],
+                7
+              ]
+            ]
+          }
+        },
+        "valid": {
+          "images": 337,
+          "labels": 337,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 337,
+          "empty_label_files": 0,
+          "instances": 382,
+          "format": {
+            "polygon_seg": 382
+          },
+          "per_class": {
+            "0": 15,
+            "1": 30,
+            "2": 30,
+            "3": 25,
+            "4": 27,
+            "5": 70,
+            "6": 25,
+            "7": 31,
+            "8": 34,
+            "9": 30,
+            "10": 29,
+            "11": 23,
+            "12": 13
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 337,
+            "checked": 337,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 337
+            },
+            "width_min": 118,
+            "width_max": 2560,
+            "height_min": 172,
+            "height_max": 2560,
+            "uniform_size": false,
+            "most_common_size": [
+              [
+                [
+                  612,
+                  408
+                ],
+                22
+              ],
+              [
+                [
+                  225,
+                  225
+                ],
+                11
+              ],
+              [
+                [
+                  259,
+                  194
+                ],
+                4
+              ]
+            ]
+          }
+        },
+        "test": {
+          "images": 169,
+          "labels": 169,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 169,
+          "empty_label_files": 2,
+          "instances": 195,
+          "format": {
+            "polygon_seg": 195
+          },
+          "per_class": {
+            "0": 14,
+            "1": 28,
+            "2": 12,
+            "3": 16,
+            "4": 11,
+            "5": 10,
+            "6": 12,
+            "7": 9,
+            "8": 16,
+            "9": 17,
+            "10": 17,
+            "11": 15,
+            "12": 18
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 169,
+            "checked": 169,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 169
+            },
+            "width_min": 180,
+            "width_max": 1600,
+            "height_min": 168,
+            "height_max": 1600,
+            "uniform_size": false,
+            "most_common_size": [
+              [
+                [
+                  225,
+                  225
+                ],
+                12
+              ],
+              [
+                [
+                  612,
+                  408
+                ],
+                9
+              ],
+              [
+                [
+                  259,
+                  194
+                ],
+                2
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "pc_parts": {
+      "classes": [
+        "cables",
+        "case",
+        "cpu",
+        "gpu",
+        "hdd",
+        "headset",
+        "keyboard",
+        "microphone",
+        "monitor",
+        "motherboard",
+        "mouse",
+        "ram",
+        "speakers",
+        "webcam"
+      ],
+      "splits": {
+        "train": {
+          "images": 2061,
+          "labels": 2061,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 2061,
+          "empty_label_files": 9,
+          "instances": 2409,
+          "format": {
+            "bbox5": 1998,
+            "polygon_seg": 411
+          },
+          "per_class": {
+            "0": 191,
+            "1": 171,
+            "2": 133,
+            "3": 124,
+            "4": 170,
+            "5": 195,
+            "6": 216,
+            "7": 151,
+            "8": 194,
+            "9": 180,
+            "10": 162,
+            "11": 159,
+            "12": 247,
+            "13": 116
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 2061,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "valid": {
+          "images": 443,
+          "labels": 443,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 443,
+          "empty_label_files": 3,
+          "instances": 505,
+          "format": {
+            "bbox5": 418,
+            "polygon_seg": 87
+          },
+          "per_class": {
+            "0": 36,
+            "1": 36,
+            "2": 31,
+            "3": 20,
+            "4": 36,
+            "5": 42,
+            "6": 38,
+            "7": 32,
+            "8": 45,
+            "9": 40,
+            "10": 33,
+            "11": 38,
+            "12": 53,
+            "13": 25
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 443,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "test": {
+          "images": 439,
+          "labels": 439,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 439,
+          "empty_label_files": 1,
+          "instances": 537,
+          "format": {
+            "bbox5": 436,
+            "polygon_seg": 101
+          },
+          "per_class": {
+            "0": 47,
+            "1": 34,
+            "2": 30,
+            "3": 24,
+            "4": 37,
+            "5": 41,
+            "6": 58,
+            "7": 38,
+            "8": 45,
+            "9": 38,
+            "10": 33,
+            "11": 34,
+            "12": 55,
+            "13": 23
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 439,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "balanced_ewaste": {
+      "classes": [
+        "Battery",
+        "Blood-Pressure-Monitor",
+        "Boiler",
+        "Clothes-Iron",
+        "Coffee-Machine",
+        "Computer-Keyboard",
+        "Computer-Mouse",
+        "Cooling-Display",
+        "Desktop-PC",
+        "Digital-Oscilloscope",
+        "Drone",
+        "Electric-Guitar",
+        "Electronic-Keyboard",
+        "Flashlight",
+        "Flat-Panel-Monitor",
+        "Flat-Panel-TV",
+        "Glucose-Meter",
+        "HDD",
+        "Laptop",
+        "Microwave",
+        "Music-Player",
+        "Oven",
+        "PCB",
+        "Photovoltaic-Panel",
+        "Projector",
+        "Refrigerator",
+        "Rotary-Mower",
+        "Router",
+        "Server",
+        "Smartphone",
+        "Smoke-Detector",
+        "Straight-Tube-Fluorescent-Lamp",
+        "Street-Lamp",
+        "TV-Remote-Control",
+        "Telephone-Set",
+        "USB-Flash-Drive",
+        "Washing-Machine"
+      ],
+      "splits": {
+        "train": {
+          "images": 4991,
+          "labels": 4991,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 4991,
+          "empty_label_files": 0,
+          "instances": 5590,
+          "format": {
+            "bbox5": 3749,
+            "polygon_seg": 1841
+          },
+          "per_class": {
+            "0": 180,
+            "1": 131,
+            "2": 136,
+            "3": 143,
+            "4": 205,
+            "5": 145,
+            "6": 147,
+            "7": 145,
+            "8": 150,
+            "9": 151,
+            "10": 160,
+            "11": 144,
+            "12": 178,
+            "13": 139,
+            "14": 145,
+            "15": 144,
+            "16": 145,
+            "17": 150,
+            "18": 149,
+            "19": 151,
+            "20": 134,
+            "21": 147,
+            "22": 146,
+            "23": 142,
+            "24": 130,
+            "25": 167,
+            "26": 147,
+            "27": 147,
+            "28": 162,
+            "29": 161,
+            "30": 136,
+            "31": 189,
+            "32": 142,
+            "33": 162,
+            "34": 134,
+            "35": 134,
+            "36": 172
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 4991,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "valid": {
+          "images": 1444,
+          "labels": 1444,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 1444,
+          "empty_label_files": 0,
+          "instances": 1641,
+          "format": {
+            "bbox5": 1135,
+            "polygon_seg": 506
+          },
+          "per_class": {
+            "0": 37,
+            "1": 52,
+            "2": 43,
+            "3": 47,
+            "4": 50,
+            "5": 40,
+            "6": 36,
+            "7": 42,
+            "8": 37,
+            "9": 43,
+            "10": 51,
+            "11": 46,
+            "12": 52,
+            "13": 40,
+            "14": 47,
+            "15": 37,
+            "16": 38,
+            "17": 35,
+            "18": 54,
+            "19": 57,
+            "20": 45,
+            "21": 46,
+            "22": 37,
+            "23": 49,
+            "24": 42,
+            "25": 65,
+            "26": 36,
+            "27": 36,
+            "28": 37,
+            "29": 39,
+            "30": 44,
+            "31": 52,
+            "32": 53,
+            "33": 46,
+            "34": 49,
+            "35": 38,
+            "36": 43
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 1444,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "test": {
+          "images": 776,
+          "labels": 776,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 776,
+          "empty_label_files": 0,
+          "instances": 869,
+          "format": {
+            "polygon_seg": 283,
+            "bbox5": 586
+          },
+          "per_class": {
+            "0": 33,
+            "1": 19,
+            "2": 30,
+            "3": 20,
+            "4": 33,
+            "5": 22,
+            "6": 20,
+            "7": 20,
+            "8": 19,
+            "9": 20,
+            "10": 23,
+            "11": 18,
+            "12": 19,
+            "13": 21,
+            "14": 20,
+            "15": 23,
+            "16": 22,
+            "17": 25,
+            "18": 20,
+            "19": 23,
+            "20": 24,
+            "21": 29,
+            "22": 20,
+            "23": 20,
+            "24": 28,
+            "25": 18,
+            "26": 20,
+            "27": 25,
+            "28": 20,
+            "29": 33,
+            "30": 23,
+            "31": 27,
+            "32": 18,
+            "33": 32,
+            "34": 23,
+            "35": 32,
+            "36": 27
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 776,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "pcb_components": {
+      "classes": [
+        "battery",
+        "button",
+        "buzzer",
+        "capacitor",
+        "clock",
+        "connector",
+        "diode",
+        "display",
+        "fuse",
+        "heatsink",
+        "ic",
+        "inductor",
+        "led",
+        "pads",
+        "pins",
+        "potentiometer",
+        "relay",
+        "resistor",
+        "switch",
+        "transformer",
+        "transistor"
+      ],
+      "splits": {
+        "train": {
+          "images": 1788,
+          "labels": 1788,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 1788,
+          "empty_label_files": 0,
+          "instances": 46782,
+          "format": {
+            "bbox5": 46782
+          },
+          "per_class": {
+            "0": 126,
+            "1": 129,
+            "2": 126,
+            "3": 14925,
+            "4": 261,
+            "5": 2460,
+            "6": 1315,
+            "7": 180,
+            "8": 315,
+            "10": 6174,
+            "11": 426,
+            "12": 1623,
+            "13": 579,
+            "14": 605,
+            "15": 174,
+            "16": 117,
+            "17": 15031,
+            "18": 828,
+            "19": 3,
+            "20": 1385
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 1788,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 512,
+            "width_max": 512,
+            "height_min": 512,
+            "height_max": 512,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  512,
+                  512
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "valid": {
+          "images": 173,
+          "labels": 173,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 173,
+          "empty_label_files": 0,
+          "instances": 4877,
+          "format": {
+            "bbox5": 4877
+          },
+          "per_class": {
+            "0": 5,
+            "1": 21,
+            "2": 15,
+            "3": 1627,
+            "4": 25,
+            "5": 319,
+            "6": 134,
+            "7": 19,
+            "8": 22,
+            "9": 3,
+            "10": 623,
+            "11": 53,
+            "12": 148,
+            "13": 85,
+            "14": 54,
+            "15": 19,
+            "16": 36,
+            "17": 1478,
+            "18": 67,
+            "20": 124
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 173,
+            "checked": 173,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 173
+            },
+            "width_min": 512,
+            "width_max": 512,
+            "height_min": 512,
+            "height_max": 512,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  512,
+                  512
+                ],
+                173
+              ]
+            ]
+          }
+        },
+        "test": {
+          "images": 86,
+          "labels": 86,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 86,
+          "empty_label_files": 0,
+          "instances": 2473,
+          "format": {
+            "bbox5": 2473
+          },
+          "per_class": {
+            "0": 7,
+            "1": 21,
+            "2": 3,
+            "3": 992,
+            "4": 9,
+            "5": 169,
+            "6": 40,
+            "7": 7,
+            "8": 20,
+            "9": 1,
+            "10": 190,
+            "11": 15,
+            "12": 86,
+            "13": 54,
+            "14": 60,
+            "15": 4,
+            "16": 9,
+            "17": 699,
+            "18": 41,
+            "19": 1,
+            "20": 45
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 86,
+            "checked": 86,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 86
+            },
+            "width_min": 512,
+            "width_max": 512,
+            "height_min": 512,
+            "height_max": 512,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  512,
+                  512
+                ],
+                86
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "electrocom61_yolo": {
+      "classes": [
+        "1-5-Volt-Battery",
+        "3-3-Volt-Battery",
+        "7-Segment-Display",
+        "9-Volt-Battery",
+        "Arduino-Mega",
+        "Arduino-Nano",
+        "Arduino-Uno",
+        "BJT-Transistor",
+        "Bluetooth-Module",
+        "Breadboard",
+        "Bridge-Rectifier",
+        "Buck-Converter",
+        "Buzzer",
+        "Capacitor-10mf",
+        "Capacitor-470mf",
+        "DC-Motor",
+        "Diode",
+        "ESP32",
+        "ESP32-CAM",
+        "FT-232-USB-Serial-Module",
+        "Film-Capacitor",
+        "Fuse",
+        "Fuse-Base",
+        "GSM-Module",
+        "Gas-Sensor",
+        "Heat-Sink",
+        "High-Voltage-Ceramic-Capacitor",
+        "Humidity-Sensor",
+        "IC-Base-14-Pin",
+        "IC-Base-28-Pin",
+        "IC-Chip",
+        "IGBT",
+        "IR-Sensor",
+        "Inductor",
+        "Keypad",
+        "LCD-Display",
+        "LDR-Sensor",
+        "LED-Light",
+        "Low-Voltage-Ceramic-Capacitor",
+        "MLC-Capacitor",
+        "MOSFET",
+        "Motion-Sensor",
+        "Motor-Driver",
+        "NTC-Thermistor",
+        "OLED-Display",
+        "Pin-Header",
+        "Push-Switch",
+        "RFID-Scanner",
+        "Raindrops-Module",
+        "Relay-Module",
+        "Resistor",
+        "Rocker-Switch",
+        "Servo-Motor",
+        "Soil-Moisture-Sensor",
+        "Sonar-Sensor",
+        "TCRT5000",
+        "Tact-Switch",
+        "Taper-Potentiometer",
+        "Trimmer-Potentiometer",
+        "Water-Sensor",
+        "Zener-Diode"
+      ],
+      "splits": {
+        "train": {
+          "images": 1478,
+          "labels": 1478,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 1478,
+          "empty_label_files": 0,
+          "instances": 9188,
+          "format": {
+            "bbox5": 9188
+          },
+          "per_class": {
+            "0": 94,
+            "1": 77,
+            "2": 131,
+            "3": 160,
+            "4": 129,
+            "5": 77,
+            "6": 201,
+            "7": 102,
+            "8": 249,
+            "9": 130,
+            "10": 162,
+            "11": 117,
+            "12": 272,
+            "13": 84,
+            "14": 84,
+            "15": 51,
+            "16": 257,
+            "17": 190,
+            "18": 73,
+            "19": 54,
+            "20": 158,
+            "21": 161,
+            "22": 156,
+            "23": 164,
+            "24": 221,
+            "25": 171,
+            "26": 257,
+            "27": 167,
+            "28": 167,
+            "29": 165,
+            "30": 333,
+            "31": 82,
+            "32": 82,
+            "33": 293,
+            "34": 88,
+            "35": 177,
+            "36": 161,
+            "37": 293,
+            "38": 98,
+            "39": 292,
+            "40": 56,
+            "41": 161,
+            "42": 177,
+            "43": 100,
+            "44": 279,
+            "45": 50,
+            "46": 277,
+            "47": 153,
+            "48": 65,
+            "49": 158,
+            "50": 118,
+            "51": 83,
+            "52": 169,
+            "53": 65,
+            "54": 235,
+            "55": 115,
+            "56": 71,
+            "57": 55,
+            "58": 160,
+            "59": 165,
+            "60": 96
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 1478,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "valid": {
+          "images": 438,
+          "labels": 438,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 438,
+          "empty_label_files": 0,
+          "instances": 2600,
+          "format": {
+            "bbox5": 2600
+          },
+          "per_class": {
+            "0": 109,
+            "1": 38,
+            "2": 36,
+            "4": 29,
+            "5": 105,
+            "6": 5,
+            "7": 100,
+            "9": 31,
+            "10": 45,
+            "11": 33,
+            "13": 110,
+            "14": 113,
+            "15": 31,
+            "16": 6,
+            "18": 37,
+            "19": 31,
+            "20": 15,
+            "21": 7,
+            "22": 15,
+            "23": 48,
+            "25": 3,
+            "27": 45,
+            "28": 50,
+            "29": 44,
+            "30": 4,
+            "31": 119,
+            "32": 119,
+            "34": 91,
+            "38": 102,
+            "40": 130,
+            "41": 48,
+            "43": 105,
+            "45": 104,
+            "48": 35,
+            "49": 45,
+            "50": 33,
+            "51": 86,
+            "52": 2,
+            "53": 98,
+            "55": 32,
+            "56": 115,
+            "57": 34,
+            "58": 47,
+            "59": 44,
+            "60": 121
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 438,
+            "checked": 400,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 400
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                400
+              ]
+            ]
+          }
+        },
+        "test": {
+          "images": 205,
+          "labels": 205,
+          "images_without_label": [],
+          "n_images_without_label": 0,
+          "labels_without_image": [],
+          "n_labels_without_image": 0,
+          "label_files": 205,
+          "empty_label_files": 0,
+          "instances": 1149,
+          "format": {
+            "bbox5": 1149
+          },
+          "per_class": {
+            "0": 8,
+            "1": 90,
+            "2": 17,
+            "4": 19,
+            "5": 12,
+            "6": 1,
+            "7": 27,
+            "9": 20,
+            "10": 23,
+            "11": 18,
+            "13": 24,
+            "14": 22,
+            "15": 89,
+            "16": 2,
+            "17": 2,
+            "18": 82,
+            "19": 88,
+            "20": 5,
+            "21": 8,
+            "22": 4,
+            "23": 24,
+            "25": 1,
+            "27": 22,
+            "28": 22,
+            "29": 22,
+            "30": 2,
+            "31": 15,
+            "32": 20,
+            "34": 12,
+            "38": 17,
+            "40": 21,
+            "41": 20,
+            "43": 17,
+            "45": 17,
+            "48": 87,
+            "49": 25,
+            "50": 18,
+            "51": 12,
+            "52": 3,
+            "53": 21,
+            "55": 18,
+            "56": 26,
+            "57": 83,
+            "58": 21,
+            "59": 21,
+            "60": 21
+          },
+          "out_of_range_coords": 0,
+          "bad_lines_sample": [],
+          "image_stats": {
+            "total": 205,
+            "checked": 205,
+            "corrupt": [],
+            "n_corrupt": 0,
+            "modes": {
+              "RGB": 205
+            },
+            "width_min": 640,
+            "width_max": 640,
+            "height_min": 640,
+            "height_max": 640,
+            "uniform_size": true,
+            "most_common_size": [
+              [
+                [
+                  640,
+                  640
+                ],
+                205
+              ]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "electrocom61_note": "dataset/electrocom61 is the GitHub code repo only (Notebooks/Results/Structure) - no train images. Download the 2121-image YOLO set from Mendeley Data DOI 10.17632/6scy6h8sjz.2 or Kaggle faiyazabdullah/electrocom61, then add ml/configs mapping before including it in preprocess."
+}

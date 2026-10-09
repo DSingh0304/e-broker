@@ -1,0 +1,9 @@
+# E-Broker ML pipeline deps (local EDA + preprocessing)
+# Training itself runs on Modal (see modal_train.py), so ultralytics/modal
+# are pinned there in the Modal image, not required locally.
+pillow>=10
+pyyaml>=6
+numpy>=1.26
+tqdm>=4.66
+matplotlib>=3.8
+pandas>=2.2
