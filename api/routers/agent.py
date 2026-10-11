@@ -169,7 +169,7 @@ async def agent_result(
     if row is None:
         return {"status": "pending", "result": None, "error_detail": None, "duration_ms": None}
 
-    # Polling endpoint — never cache; the row flips pending→done mid-stream.
+    # Polling endpoint - never cache; the row flips pending→done mid-stream.
     from fastapi.responses import JSONResponse
 
     return JSONResponse(

@@ -1,5 +1,5 @@
 """
-Automated regression test — runs after every Modal training job.
+Automated regression test - runs after every Modal training job.
 Blocks the deploy gate if any class drops >5% mAP50 vs the baseline.
 Run: CANDIDATE_MODEL_PATH=/tmp/candidate.pt pytest ml/tests/ -v
 """

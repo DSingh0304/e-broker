@@ -7,7 +7,7 @@ interface Props {
 }
 
 /**
- * Kabadiwala Bot — E-Broker's mascot, assembled from e-waste parts:
+ * Kabadiwala Bot - E-Broker's mascot, assembled from e-waste parts:
  * solder-silver head, PCB torso, copper arms, one hand holding a battery.
  * Parts carry stable ids so later sections can transform/react to them.
  */

@@ -16,7 +16,7 @@ services:
       retries: 5
 
   # S3-compatible object storage (Elestio MinIO). boto3 speaks the S3 API
-  # against this endpoint — no AWS service dependency.
+  # against this endpoint - no AWS service dependency.
   minio:
     image: elestio/minio:latest
     container_name: ebroker-minio

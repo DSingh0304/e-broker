@@ -1,4 +1,4 @@
-# ECR module — Lambda container image registries
+# ECR module - Lambda container image registries
 resource "aws_ecr_repository" "api" {
   for_each = toset(["public", "admin", "internal"])
   name                 = "${var.project}-${each.value}"

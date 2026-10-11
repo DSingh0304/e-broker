@@ -165,7 +165,7 @@ def _looks_annotated(path: Path) -> bool:
 
     try:
         img = PILImage.open(path).convert("RGB").resize((128, 128))
-    except Exception:  # noqa: BLE001 — unreadable file counts as unusable
+    except Exception:  # noqa: BLE001 - unreadable file counts as unusable
         return True
     px = list(img.getdata())
     overlay = sum(
@@ -235,7 +235,7 @@ def _discover_images(image_dir: str | None, n: int) -> list[tuple[str, bytes]]:
                 continue
             try:
                 chosen.append((p.name, p.read_bytes()))
-            except Exception:  # noqa: BLE001, S112 — skip unreadable files
+            except Exception:  # noqa: BLE001, S112 - skip unreadable files
                 continue
         print(f"seeding {len(chosen)} clean images sampled from {root} "
               f"(pool={len(pool)}, skipped {skipped_annotated} pre-annotated)")
@@ -444,7 +444,7 @@ async def main(db_url: str, n_images: int = 60, image_dir: str | None = "data_pr
                 processing_types=random.sample(PROCESSES, random.randint(1, 3)),
                 verified=True))
 
-        # ── Materials (9 — one per class, reference table) ────────────────
+        # ── Materials (9 - one per class, reference table) ────────────────
         for cls in UNIFIED_CLASSES:
             s.add(Material(name=cls, price_per_kg=float(PRICE_MID[cls])))
 

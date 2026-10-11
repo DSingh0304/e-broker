@@ -1,4 +1,4 @@
-# Cognito module — admin user pool, TOTP MFA enforced
+# Cognito module - admin user pool, TOTP MFA enforced
 resource "aws_cognito_user_pool" "admins" {
   name = "${var.project}-admins"
 

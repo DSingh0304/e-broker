@@ -17,9 +17,9 @@ const PIN = (active: boolean) =>
   `<div class="recycler-pin${active ? " recycler-pin-active" : ""}"></div>`;
 
 /**
- * Esri street basemap — keyless and reliable on any network, with warm
+ * Esri street basemap - keyless and reliable on any network, with warm
  * paper-toned pins. Wheel zoom stays off until the map is focused,
- * so page scroll is never hijacked — focus to explore, blur to release.
+ * so page scroll is never hijacked - focus to explore, blur to release.
  */
 export function RecyclerMap({ recyclers, center, selectedName, focus, onSelect }: Props) {
   const divRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ export function RecyclerMap({ recyclers, center, selectedName, focus, onSelect }
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Rebuild pins only when the result set (or base center) changes —
+  // Rebuild pins only when the result set (or base center) changes -
   // never on selection, so choosing a card doesn't yank the viewport.
   useEffect(() => {
     const map = mapRef.current;

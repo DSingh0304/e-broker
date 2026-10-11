@@ -97,7 +97,7 @@ export default function KabadiwalaInbox() {
       setNotice(`Accepted ${inr(bid.bid_amount)} from ${bid.vendor_name ?? "vendor"}. Lot marked sold.`);
       await load();
     } catch {
-      setError("Could not accept that offer — it may already be closed. The feed is refreshed.");
+      setError("Could not accept that offer - it may already be closed. The feed is refreshed.");
       await load();
     } finally {
       setAccepting(null);
@@ -121,7 +121,7 @@ export default function KabadiwalaInbox() {
                     {openCount} open offer{openCount === 1 ? "" : "s"} waiting on you
                   </>
                 ) : (
-                  "All caught up — no open offers."
+                  "All caught up - no open offers."
                 )}
               </p>
             </div>
@@ -259,7 +259,7 @@ export default function KabadiwalaInbox() {
                               </p>
                               <p className="mt-0.5 font-sans text-xs text-[#5A6E63]">
                                 {lot ? `${lot.materials.slice(0, 2).map(label).join(" · ") || "Mixed"} · ` : ""}
-                                asking {b.asking_price !== null ? inr(b.asking_price) : "—"}
+                                asking {b.asking_price !== null ? inr(b.asking_price) : "-"}
                               </p>
                               <p className={`mt-0.5 font-sans text-xs ${s.tone}`}>{s.text}</p>
                             </div>

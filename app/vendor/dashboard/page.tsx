@@ -103,14 +103,14 @@ export default function VendorDashboard() {
   const insight = !session
     ? "Sign in as a vendor and I track every bid against the live floor."
     : !isVendor
-      ? "Vendor floor only — kabadiwalas decide from their own dashboard."
+      ? "Vendor floor only - kabadiwalas decide from their own dashboard."
       : bids === null
         ? "Reading your bids…"
         : stats.open === 0
-          ? "No open bids. The floor has fresh lots — go take a look."
+          ? "No open bids. The floor has fresh lots - go take a look."
           : stats.outbid === 0
             ? `Leading all ${stats.open} open bid${stats.open === 1 ? "" : "s"}. Hold position.`
-            : `${stats.outbid} lot${stats.outbid === 1 ? " needs" : "s need"} a raise — biggest gap first below.`;
+            : `${stats.outbid} lot${stats.outbid === 1 ? " needs" : "s need"} a raise - biggest gap first below.`;
 
   return (
     <MotionConfig reducedMotion="user">
@@ -149,11 +149,11 @@ export default function VendorDashboard() {
           {/* Stat tiles */}
           <div className="grid grid-cols-2 gap-3 xl:grid-cols-5" aria-live="polite">
             {[
-              { label: "Open bids", value: bids ? String(stats.open) : "—" },
-              { label: "Leading", value: bids ? String(stats.leading) : "—", accent: true },
-              { label: "Outbid", value: bids ? String(stats.outbid) : "—", warn: stats.outbid > 0 },
-              { label: "Won", value: bids ? String(stats.won) : "—" },
-              { label: "Staked", value: bids ? inr(stats.staked) : "—" },
+              { label: "Open bids", value: bids ? String(stats.open) : "-" },
+              { label: "Leading", value: bids ? String(stats.leading) : "-", accent: true },
+              { label: "Outbid", value: bids ? String(stats.outbid) : "-", warn: stats.outbid > 0 },
+              { label: "Won", value: bids ? String(stats.won) : "-" },
+              { label: "Staked", value: bids ? inr(stats.staked) : "-" },
             ].map((s) => (
               <div key={s.label} className="rounded-2xl border border-[#8A5A26]/40 bg-[#FFFBF0] p-4">
                 <p className="font-sans text-xs uppercase tracking-wide text-[#5A6E63]">{s.label}</p>
@@ -169,7 +169,7 @@ export default function VendorDashboard() {
           </div>
 
           <div className="mt-5 grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            {/* Attention summary — positions live on the bids page */}
+            {/* Attention summary - positions live on the bids page */}
             <section aria-label="Needs attention" className="rounded-2xl border-2 border-[#0F3B2C] bg-[#0F3B2C] p-4 text-[#EAD0AC]">
               <h2 className="font-display text-sm font-bold uppercase tracking-wide text-[#D98C53]">
                 Needs attention
@@ -185,13 +185,13 @@ export default function VendorDashboard() {
                 <p className="mt-2 font-sans text-sm text-[#C0C0C0]" aria-live="polite">Checking positions…</p>
               ) : stats.outbid === 0 ? (
                 <p className="mt-2 font-sans text-sm text-[#C0C0C0]">
-                  {stats.open === 0 ? "No open bids — browse the market for fresh lots." : "Leading everywhere. Nothing needs a raise."}
+                  {stats.open === 0 ? "No open bids - browse the market for fresh lots." : "Leading everywhere. Nothing needs a raise."}
                 </p>
               ) : (
                 <div className="mt-2 flex flex-wrap items-center gap-3">
                   <p className="font-sans text-sm">
                     Outbid on <span className="font-display text-xl font-bold text-[#D98C53]">{stats.outbid}</span>{" "}
-                    lot{stats.outbid === 1 ? "" : "s"} — biggest gap{" "}
+                    lot{stats.outbid === 1 ? "" : "s"} - biggest gap{" "}
                     {(() => {
                       const gaps = needsRaise.map(({ lot, top }) => (lot.top_bid ?? top) - top);
                       return gaps.length ? inr(Math.max(...gaps)) : "";
@@ -220,7 +220,7 @@ export default function VendorDashboard() {
                 {stats.lost > 0 && <> · {stats.lost} lost</>} · win rate{" "}
                 {(() => {
                   const decided = stats.won + stats.lost;
-                  return decided === 0 ? "—" : `${Math.round((stats.won / decided) * 100)}%`;
+                  return decided === 0 ? "-" : `${Math.round((stats.won / decided) * 100)}%`;
                 })()}
               </p>
             </section>

@@ -1,5 +1,5 @@
 #!/bin/bash
-# test_e2e_smoke.sh — production smoke test. Run after the stack is up.
+# test_e2e_smoke.sh - production smoke test. Run after the stack is up.
 # Expects: API :8000, web :3000, Floci/MinIO storage, Ollama on :11434.
 set -u
 

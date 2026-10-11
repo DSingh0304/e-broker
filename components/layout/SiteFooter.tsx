@@ -55,11 +55,11 @@ export function SiteFooter() {
           <p className="font-display text-lg font-bold">E-BROKER</p>
           <p className="mt-2 max-w-xs text-sm text-text-secondary">
             Photograph e-waste, get a fair AI-priced valuation, and route it to
-            certified recyclers — safely and profitably.
+            certified recyclers - safely and profitably.
           </p>
         </div>
         {GROUPS.map((g) => (
-          <nav key={g.heading} aria-label={`Footer — ${g.heading}`}>
+          <nav key={g.heading} aria-label={`Footer - ${g.heading}`}>
             <h2 className="font-display text-xs font-bold uppercase tracking-widest text-pcb-accent">
               {g.heading}
             </h2>

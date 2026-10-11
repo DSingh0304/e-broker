@@ -1,4 +1,4 @@
-# E-Broker Terraform — ap-south-1, 3-tier VPC + RDS + S3 + Cognito + SQS + ECR
+# E-Broker Terraform - ap-south-1, 3-tier VPC + RDS + S3 + Cognito + SQS + ECR
 terraform {
   required_version = ">= 1.6"
   required_providers {

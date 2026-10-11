@@ -7,7 +7,7 @@ through Alembic (`api/alembic/`). UUIDs are `String(36)` (portable, no
 
 ## Tables
 
-### `images` — one row per upload
+### `images` - one row per upload
 | Column | Type | Notes |
 |---|---|---|
 | `id` | String(36) PK | uuid4 |
@@ -17,13 +17,13 @@ through Alembic (`api/alembic/`). UUIDs are `String(36)` (portable, no
 | `width` / `height` | Int | post-EXIF-strip dimensions |
 | `review_status` | String(16) | `pending` → `approved` \| `corrected` \| `skipped` (one-way) |
 
-### `detections` — append-only model outputs
+### `detections` - append-only model outputs
 `id`, `image_id` FK CASCADE indexed, `class_name`, `confidence` float,
 `bbox` JSONB `{x1,y1,x2,y2}` normalized 0–1, `model_version` (default
-`best.pt`), `detected_at`. **Never updated or deleted** — corrections create
+`best.pt`), `detected_at`. **Never updated or deleted** - corrections create
 `labels`, preserving the audit trail.
 
-### `labels` — human (or imported) ground truth
+### `labels` - human (or imported) ground truth
 `id`, `image_id` FK CASCADE indexed, `class_name`, `bbox` JSONB
 `{xc,yc,w,h}` YOLO format, `source` (`model`\|`admin`\|`import`),
 `created_by`, `created_at`, `is_active` bool. Corrections soft-delete
@@ -66,6 +66,6 @@ runs `alembic upgrade head`. Future schema changes: add a real revision with
 
 ## Seeds
 - `api/scripts/seed_recyclers.py --csv data/recyclers_cpcb.csv [--db URL]`
-- `api/tests/e2e_seed.py [DB_URL]` — wipes `images` and seeds one pending
+- `api/tests/e2e_seed.py [DB_URL]` - wipes `images` and seeds one pending
   image + detection + label. **Destructive by design** (E2E isolation);
   never point it at a real database.

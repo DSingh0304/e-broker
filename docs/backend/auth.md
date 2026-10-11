@@ -8,9 +8,9 @@ Three independent gates. Nothing shares credentials across tiers.
   "Authorization: Bearer …"` or the frontend's `NEXT_PUBLIC_ADMIN_TOKEN`.
 - **Dev browser:** same bypass, but via the `ebroker_dev_admin=1` cookie
   (see web `lib/auth.ts`). Lets a logged-in browser call admin APIs without
-  stuffing tokens into JS — bypass-gated, dev-only.
+  stuffing tokens into JS - bypass-gated, dev-only.
 - **Prod:** bypass forced `false`; Cognito JWT verification against JWKS
-  (issuer/audience + `custom:role`), **not yet implemented** — this is the
+  (issuer/audience + `custom:role`), **not yet implemented** - this is the
   largest open security item. Until then, do not expose admin routes publicly.
 
 ## 2. Internal (`require_internal_key`) → 403
@@ -18,7 +18,7 @@ Modal → Lambda callbacks (`/internal/*`) must send `X-Internal-Key` equal to
 `INTERNAL_API_KEY` (SSM SecureString in prod, rotated monthly via
 EventBridge). Constant-time comparison is used in the HMAC variant
 (`api-reference` metrics endpoint); the header check here is equality
-against a high-entropy secret — acceptable, rotation is the real control.
+against a high-entropy secret - acceptable, rotation is the real control.
 
 ## 3. Public upload (no auth) → fingerprinting
 `fingerprint_uploader()` = `SHA-256(filename | 0.0.0.0 | hour-bucket)[:32]`.

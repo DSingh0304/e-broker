@@ -30,19 +30,19 @@ type Verdict = { tone: "strong" | "fair" | "weak" | "muted"; text: string };
 
 function verdictFor(bid: number, asking: number | null, range: { min_inr: number; max_inr: number } | null): Verdict {
   if (!range || range.max_inr <= 0) {
-    return { tone: "muted", text: "AI valuation is still computing — weigh this against your asking price for now." };
+    return { tone: "muted", text: "AI valuation is still computing - weigh this against your asking price for now." };
   }
   const parts: string[] = [];
   let tone: Verdict["tone"];
   if (bid >= range.max_inr) {
     tone = "strong";
-    parts.push(`Above the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) — an excellent offer.`);
+    parts.push(`Above the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) - an excellent offer.`);
   } else if (bid >= range.min_inr) {
     tone = "fair";
-    parts.push(`Inside the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) — a fair deal.`);
+    parts.push(`Inside the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) - a fair deal.`);
   } else {
     tone = "weak";
-    parts.push(`Below the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) — better bids usually arrive.`);
+    parts.push(`Below the AI range (${inr(range.min_inr)}–${inr(range.max_inr)}) - better bids usually arrive.`);
   }
   if (asking !== null) {
     parts.push(bid >= asking ? "It also meets your asking price." : "It is under your asking price.");
@@ -57,7 +57,7 @@ const TONE_STYLES: Record<Verdict["tone"], string> = {
   muted: "border-[#8A5A26]/30 bg-[#0F3B2C]/5 text-[#5A6E63]",
 };
 
-/** Where the bid lands against the AI range — a glanceable meter. */
+/** Where the bid lands against the AI range - a glanceable meter. */
 function RangeMeter({ bid, range }: { bid: number; range: { min_inr: number; max_inr: number } | null }) {
   if (!range || range.max_inr <= 0) return null;
   const cap = Math.max(range.max_inr, bid) * 1.05;
@@ -228,7 +228,7 @@ export default function KabadiwalaDashboard() {
       setNotice(`Accepted ${inr(bid.bid_amount)}. The lot is marked sold.`);
       await reload();
     } catch {
-      setError("Could not accept that offer — it may already be closed. The queue is refreshed.");
+      setError("Could not accept that offer - it may already be closed. The queue is refreshed.");
       await reload();
     } finally {
       setAccepting(null);
@@ -263,7 +263,7 @@ export default function KabadiwalaDashboard() {
                 ) : listings === null ? (
                   "Reading your floor…"
                 ) : (
-                  "All clear — no open offers right now."
+                  "All clear - no open offers right now."
                 )}
               </p>
             </div>
@@ -392,7 +392,7 @@ export default function KabadiwalaDashboard() {
                             </>
                           ) : (
                             <p className="mt-0.5 font-sans text-xs text-[#5A6E63]">
-                              Hover a decision — I read the offer against the AI valuation.
+                              Hover a decision - I read the offer against the AI valuation.
                             </p>
                           )}
                         </div>
@@ -448,7 +448,7 @@ export default function KabadiwalaDashboard() {
                                     hoverIn(
                                       range
                                         ? `Top ${inr(top.bid_amount)} vs AI ${inr(range.min_inr)}–${inr(range.max_inr)}`
-                                        : `Top ${inr(top.bid_amount)} — AI valuation pending`
+                                        : `Top ${inr(top.bid_amount)} - AI valuation pending`
                                     );
                                   }}
                                   onMouseLeave={hoverOut}
@@ -543,10 +543,10 @@ export default function KabadiwalaDashboard() {
                 >
                   <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
                     {[
-                      { label: "Active lots", value: overview ? String(overview.active_listings) : "—" },
-                      { label: "Sold lots", value: overview ? String(overview.sold_listings) : "—" },
-                      { label: "Bids received", value: overview ? String(overview.bids_received) : "—" },
-                      { label: "Value recovered", value: overview ? inr(overview.total_value_recovered) : "—" },
+                      { label: "Active lots", value: overview ? String(overview.active_listings) : "-" },
+                      { label: "Sold lots", value: overview ? String(overview.sold_listings) : "-" },
+                      { label: "Bids received", value: overview ? String(overview.bids_received) : "-" },
+                      { label: "Value recovered", value: overview ? inr(overview.total_value_recovered) : "-" },
                     ].map((s) => (
                       <div key={s.label} className="rounded-2xl border border-[#8A5A26]/40 bg-[#FFFBF0] p-4">
                         <p className="font-sans text-xs uppercase tracking-wide text-[#5A6E63]">{s.label}</p>
@@ -561,7 +561,7 @@ export default function KabadiwalaDashboard() {
                     </h2>
                     {soldLots.length === 0 ? (
                       <p className="mt-2 font-sans text-sm text-[#5A6E63]">
-                        Nothing sold yet — accepted offers land here.
+                        Nothing sold yet - accepted offers land here.
                       </p>
                     ) : (
                       <ul className="mt-2 divide-y divide-[#8A5A26]/20">
@@ -571,7 +571,7 @@ export default function KabadiwalaDashboard() {
                               {l.materials.slice(0, 2).map(label).join(" · ") || "Mixed"} · {l.total_weight_kg ?? "?"} kg
                             </span>
                             <span className="shrink-0 font-bold tabular-nums">
-                              {l.top_bid !== null ? inr(l.top_bid) : l.asking_price !== null ? inr(l.asking_price) : "—"}
+                              {l.top_bid !== null ? inr(l.top_bid) : l.asking_price !== null ? inr(l.asking_price) : "-"}
                             </span>
                           </li>
                         ))}

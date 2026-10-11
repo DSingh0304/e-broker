@@ -66,7 +66,7 @@ export default function TrainingPage() {
       setRunId(id);
       setStatus("queued");
 
-      // EventSource cannot send Authorization headers — the backend accepts
+      // EventSource cannot send Authorization headers - the backend accepts
       // the same dev bypass token as a ?token= query parameter.
       const src = new EventSource(
         `/api/admin/training/${id}/stream?token=${encodeURIComponent(adminToken())}`
@@ -115,7 +115,7 @@ export default function TrainingPage() {
             Training pipeline
           </h1>
           <p className="text-xs font-mono text-pcb-gold/60 mt-1">
-            YOLO retraining jobs with live progress — runs on this machine
+            YOLO retraining jobs with live progress - runs on this machine
           </p>
         </div>
         <button
@@ -143,7 +143,7 @@ export default function TrainingPage() {
           <div>
             <span className="text-pcb-gold/60 block">New labels since last run</span>
             <span className="text-lg font-bold text-pcb-copper">
-              {newLabelsCount === null ? "—" : `${newLabelsCount} ready`}
+              {newLabelsCount === null ? "-" : `${newLabelsCount} ready`}
             </span>
           </div>
           <div>
@@ -225,11 +225,11 @@ export default function TrainingPage() {
                 {runs.map((r) => (
                   <tr key={r.id} className="hover:bg-pcb-copper/10">
                     <td className="py-2 text-pcb-silver">
-                      {r.triggered_at ? new Date(r.triggered_at).toLocaleString() : "—"}
+                      {r.triggered_at ? new Date(r.triggered_at).toLocaleString() : "-"}
                     </td>
                     <td className="py-2 text-pcb-gold">{r.epochs}</td>
                     <td className="py-2 text-status-success font-bold">
-                      {r.map50 !== null && r.map50 !== undefined ? r.map50.toFixed(3) : "—"}
+                      {r.map50 !== null && r.map50 !== undefined ? r.map50.toFixed(3) : "-"}
                     </td>
                     <td className="py-2">
                       <span className="bg-pcb-copper/20 text-pcb-copper px-2 py-0.5 rounded font-bold uppercase">

@@ -46,7 +46,7 @@ def test_reload_is_atomic_under_concurrent_reads(mock_yolo, tmp_path):
     def reader():
         try:
             results.append(mgr.predict("img.jpg"))
-        except Exception as e:  # noqa: BLE001 — spec collects concurrent errors
+        except Exception as e:  # noqa: BLE001 - spec collects concurrent errors
             errors.append(e)
 
     def reloader():

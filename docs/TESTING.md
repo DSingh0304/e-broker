@@ -1,7 +1,7 @@
-# E-Broker — Testing Strategy
+# E-Broker - Testing Strategy
 ## Unit · Integration · End-to-End · CI
 
-> **Principle:** Test the boundaries that matter — YOLO inference output shape, label persistence, the training trigger threshold, and the deploy gate logic. Don't test library internals.
+> **Principle:** Test the boundaries that matter - YOLO inference output shape, label persistence, the training trigger threshold, and the deploy gate logic. Don't test library internals.
 
 ---
 
@@ -149,7 +149,7 @@ def test_multiple_detections_returned():
 
 ```python
 # api/tests/unit/test_label_service.py
-"""Label CRUD logic — approval state machine."""
+"""Label CRUD logic - approval state machine."""
 import pytest
 from api.services.label_service import (
     compute_review_status, validate_bbox, LabelSource
@@ -186,7 +186,7 @@ def test_class_must_be_in_unified_taxonomy():
 
 ```python
 # api/tests/unit/test_strands_tools.py
-"""Strands tool contracts — return shapes and toxicity logic."""
+"""Strands tool contracts - return shapes and toxicity logic."""
 import pytest
 from api.services.strands_agent import assess_toxicity, get_scrap_price
 
@@ -846,7 +846,7 @@ test("approve button sends PATCH and removes item from list", async () => {
 
 Uses **Playwright** against the real dev server (`localhost:3000` + `localhost:8000`).
 
-### 6.1 `e2e/scan-result.spec.ts` — Public User Flow
+### 6.1 `e2e/scan-result.spec.ts` - Public User Flow
 
 ```typescript
 // e2e/scan-result.spec.ts
@@ -907,7 +907,7 @@ test.describe("Scan → Result flow", () => {
 })
 ```
 
-### 6.2 `e2e/admin-labeller.spec.ts` — Admin Correction Flow
+### 6.2 `e2e/admin-labeller.spec.ts` - Admin Correction Flow
 
 ```typescript
 // e2e/admin-labeller.spec.ts
@@ -966,7 +966,7 @@ test.describe("Admin labelling flow", () => {
 })
 ```
 
-### 6.3 `e2e/admin-training.spec.ts` — Training Loop E2E
+### 6.3 `e2e/admin-training.spec.ts` - Training Loop E2E
 
 ```typescript
 // e2e/admin-training.spec.ts
@@ -1000,7 +1000,7 @@ test.describe("Training dashboard", () => {
 })
 ```
 
-### 6.4 `e2e/auth-guard.spec.ts` — Security E2E
+### 6.4 `e2e/auth-guard.spec.ts` - Security E2E
 
 ```typescript
 // e2e/auth-guard.spec.ts
@@ -1027,7 +1027,7 @@ Runs post-training, before the deploy gate becomes available.
 ```python
 # ml/tests/test_model_regression.py
 """
-Automated regression test — runs after every Modal training job.
+Automated regression test - runs after every Modal training job.
 Blocks the deploy gate if any class drops >5% mAP50 vs the baseline.
 """
 import json

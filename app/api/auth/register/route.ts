@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// POST /api/auth/register — proxies to FastAPI so the browser never needs
+// POST /api/auth/register - proxies to FastAPI so the browser never needs
 // the backend URL or internal keys. The NextAuth catch-all would otherwise
 // swallow this path with a 400.
 export async function POST(req: Request) {

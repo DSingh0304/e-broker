@@ -1,4 +1,4 @@
-"""Strands tool contracts — return shapes and toxicity logic."""
+"""Strands tool contracts - return shapes and toxicity logic."""
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -57,7 +57,7 @@ def test_toxicity_all_9_classes_covered():
 
 
 # ── New Strands SDK tools (api/services/strands_tools.py) ───────────────────
-# No Bedrock, no DB, no network — live APIs fall back to static data.
+# No Bedrock, no DB, no network - live APIs fall back to static data.
 
 
 @pytest.mark.asyncio
@@ -137,7 +137,7 @@ async def test_find_recyclers_empty_db_returns_honest_empty():
 
 @pytest.mark.asyncio
 async def test_find_recyclers_corrects_out_of_india_coords():
-    """Coords outside India bounding box should not raise — defaults to Delhi."""
+    """Coords outside India bounding box should not raise - defaults to Delhi."""
     with patch("api.services.agent_cache.query_recyclers", new=AsyncMock(return_value=[])):
         result = await find_recyclers.func(51.5, -0.1, 50.0, None)  # London
     assert result["recyclers"] is not None

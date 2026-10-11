@@ -47,15 +47,15 @@ _PRICE_BANDS = PRICE_BANDS
 _TOXICITY: dict[str, dict] = {
     "battery": {
         "level": "hazardous",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 5",
-        "hazards": ["Lead-acid / Lithium — corrosive, flammable"],
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 5",
+        "hazards": ["Lead-acid / Lithium - corrosive, flammable"],
         "safe_handling": "Do not incinerate, puncture or acid-strip. "
                          "Requires certified Battery Waste Management Rules recycler.",
         "penalty": "Up to ₹1 lakh fine under E-Waste Rules 2016 Rule 16.",
     },
     "hard_drive": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 1",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 1",
         "hazards": ["Lead solder on PCB", "Beryllium in voice coil (some models)"],
         "safe_handling": "Dismantle with gloves. No open burning. "
                          "Data-wipe required before disposal (IT Act 2000).",
@@ -63,15 +63,15 @@ _TOXICITY: dict[str, dict] = {
     },
     "pcb": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead solder", "Brominated Flame Retardants (BFR)", "Gold/Palladium traces"],
-        "safe_handling": "No open burning — BFR releases dioxins. "
+        "safe_handling": "No open burning - BFR releases dioxins. "
                          "Sell to CPCB-certified precious metal refiner.",
         "penalty": "Criminal liability under EPA 1986 Sec 15.",
     },
     "motherboard": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead solder", "BFR", "Cadmium in some capacitors"],
         "safe_handling": "No acid baths. Mechanical dismantling only. "
                          "Separate heat-sinks (aluminium) for higher scrap value.",
@@ -81,37 +81,37 @@ _TOXICITY: dict[str, dict] = {
         "level": "caution",
         "regulation": "E-Waste Rules 2016, Schedule I",
         "hazards": ["Lead solder", "Gold-plated contacts"],
-        "safe_handling": "Handle with gloves. High value — avoid acid cleaning. "
+        "safe_handling": "Handle with gloves. High value - avoid acid cleaning. "
                          "Sell directly to certified refiner for gold recovery.",
         "penalty": "Fine under EPA 1986.",
     },
     "copper_cable": {
         "level": "safe",
-        "regulation": "Not specifically scheduled — standard scrap metal rules.",
+        "regulation": "Not specifically scheduled - standard scrap metal rules.",
         "hazards": ["PVC insulation releases HCl/dioxins if burned"],
-        "safe_handling": "Strip mechanically — NEVER burn PVC insulation. "
+        "safe_handling": "Strip mechanically - NEVER burn PVC insulation. "
                          "Bare copper commands premium price.",
         "penalty": "Burning PVC in urban areas: ₹500–5000 municipal fine.",
     },
     "smartphone_device": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 2",
-        "hazards": ["Lithium-ion battery — fire/explosion risk", "Tantalum capacitors"],
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 2",
+        "hazards": ["Lithium-ion battery - fire/explosion risk", "Tantalum capacitors"],
         "safe_handling": "Do not puncture battery. Discharge fully before dismantling. "
-                         "Remove battery first — it commands separate scrap price.",
+                         "Remove battery first - it commands separate scrap price.",
         "penalty": "Fine under EPA 1986 and Battery Waste Management Rules 2022.",
     },
     "chip": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead/tin solder", "Arsenic in some compound semiconductors"],
         "safe_handling": "No acid baths without PPE. Sell to certified IC refiner. "
-                         "High precious metal content — do not mix with general scrap.",
+                         "High precious metal content - do not mix with general scrap.",
         "penalty": "Fine under EPA 1986.",
     },
     "peripheral_other": {
         "level": "safe",
-        "regulation": "E-Waste Rules 2016 — general category.",
+        "regulation": "E-Waste Rules 2016 - general category.",
         "hazards": ["Mixed materials; check sub-components"],
         "safe_handling": "Route via any CPCB-certified e-waste collector.",
         "penalty": "Standard e-waste disposal non-compliance fine.",
@@ -145,7 +145,7 @@ def _reference_metal_price_inr(class_name: str) -> float | None:
     """Static reference price (INR/g) for the class's backing metal.
 
     metals.dev free-tier access is exhausted, so valuations derive from the
-    reviewed snapshot in api/core/metal_prices.py — deterministic, no network.
+    reviewed snapshot in api/core/metal_prices.py - deterministic, no network.
     """
     metal = CLASS_REFERENCE_METAL.get(class_name)
     if metal is None:
@@ -212,7 +212,7 @@ async def find_recyclers(
     from api.services.agent_cache import query_recyclers
     rows = await query_recyclers(lat, lng, radius_km, accepts_class)
     if not rows:
-        # No certified recycler on file — return an honest empty result
+        # No certified recycler on file - return an honest empty result
         # instead of fabricated listings. The caller seeds 15 real rows.
         return {
             "recyclers": [],
@@ -251,7 +251,7 @@ def generate_epr_summary(
         "compliance_text": (
             f"This batch of {len(valid_classes)} e-waste component type(s) has been "
             f"identified via AI vision and registered for compliant disposal. "
-            f"{'HAZARDOUS materials present — requires CPCB-certified recycler. ' if hazardous else ''}"
+            f"{'HAZARDOUS materials present - requires CPCB-certified recycler. ' if hazardous else ''}"
             f"Passport ID: {passport_id}. Valid under E-Waste (Management) Rules 2016."
         ),
         "authority": "Central Pollution Control Board (CPCB), India",

@@ -146,7 +146,7 @@ export default function ResultPage({ params }: { params: { id: string } }) {
           <BackButton href="/scan" label="Rescan" tone="dark" ariaLabel="Back to scan" />
           <div className="min-w-0">
             <p className="font-display text-xs font-bold uppercase tracking-widest text-[#D98C53]">
-              Lab report{detections.length > 0 && verdict ? ` — ${verdict}` : ""}
+              Lab report{detections.length > 0 && verdict ? ` - ${verdict}` : ""}
             </p>
             <p className="mt-0.5 font-display text-2xl font-bold sm:text-3xl" aria-live="polite">
               {total ? <>₹{total.min_inr} – ₹{total.max_inr}</> : agentPending ? "Valuing your scrap…" : "Value unavailable"}
@@ -173,10 +173,10 @@ export default function ResultPage({ params }: { params: { id: string } }) {
             <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-xs text-[#5A6E63]">
               <span aria-live="polite">
                 {agentPending ? (
-                  <>AI analyst working{steps.length > 0 ? ` — ${steps[steps.length - 1].name}…` : "…"}</>
+                  <>AI analyst working{steps.length > 0 ? ` - ${steps[steps.length - 1].name}…` : "…"}</>
                 ) : agentStatus === "error" ? (
                   <span role="alert" className="font-semibold text-[#B42318]">
-                    AI insights unavailable — boxes above are still accurate.
+                    AI insights unavailable - boxes above are still accurate.
                   </span>
                 ) : (
                   <>Priced against live scrap rates.</>
@@ -260,7 +260,7 @@ export default function ResultPage({ params }: { params: { id: string } }) {
                     const units = agent ? Object.values(agent.pricing).map((u) => u.unit) : [];
                     const perKg = units.length > 0 && units.every((u) => u === "kg");
                     if (!Number.isFinite(w) || w <= 0) return "Enter weight to estimate this lot's payout.";
-                    if (!perKg) return "Priced per piece — total above is for the pictured items.";
+                    if (!perKg) return "Priced per piece - total above is for the pictured items.";
                     return `≈ ₹${Math.round(total.min_inr * w).toLocaleString("en-IN")} – ₹${Math.round(total.max_inr * w).toLocaleString("en-IN")} for ${w} kg`;
                   })()}
                 </p>

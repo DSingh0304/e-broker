@@ -1,4 +1,4 @@
-# E-Broker API — dev/test extras (CI installs this)
+# E-Broker API - dev/test extras (CI installs this)
 -r requirements.txt
 pytest>=8
 pytest-asyncio>=0.23

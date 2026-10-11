@@ -64,7 +64,7 @@ async def queue(page: int = 1, status: str = "pending",
         dets = (await db.execute(select(Detection).where(Detection.image_id == img.id))).scalars().all()
         out.append({
             # Thumbnails stream through the API (Floci/MinIO stay private to
-            # the backend network) — never expose storage URLs to browsers.
+            # the backend network) - never expose storage URLs to browsers.
             "imageId": img.id, "thumbnailUrl": f"/api/images/{img.id}",
             "detections": [{"className": d.class_name, "confidence": d.confidence} for d in dets],
             "reviewStatus": img.review_status, "uploadedAt": img.uploaded_at.isoformat(),
@@ -186,7 +186,7 @@ async def deploy(version_id: str, db: AsyncSession = Depends(get_db),
                 raise HTTPException(422, f"Regression blocked: class {cls} mAP50 drops {old - new:.3f}")
     try:
         get_manager().reload(cand.s3_key or version_id)
-    except Exception as exc:  # noqa: BLE001 — model file for old rows may not exist locally
+    except Exception as exc:  # noqa: BLE001 - model file for old rows may not exist locally
         log.warning("Model hot-reload skipped for %s: %s", version_id, exc)
     cand.deployed_at = datetime.now(timezone.utc)
     cand.approved_by = admin.email

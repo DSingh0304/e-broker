@@ -1,4 +1,4 @@
-# E-Broker Backend — Technical Documentation
+# E-Broker Backend - Technical Documentation
 
 FastAPI service (`api/`, ~900 lines) behind the E-Broker platform: image upload,
 YOLO inference, Strands-agent insights, admin review queue, training triggers,

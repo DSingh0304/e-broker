@@ -7,7 +7,7 @@ under uvicorn (`:8000`); in AWS each logical group maps to one Lambda
 built from `api/Dockerfile.{api,admin,internal}` (arm64, `CMD ["api.main.handler"]`).
 
 Cloudflare Workers (prod) or the Next.js rewrite (dev) mount the API under
-`/api/*` and strip the prefix — **backend routes have no `/api` prefix**.
+`/api/*` and strip the prefix - **backend routes have no `/api` prefix**.
 
 ## Request lifecycle: upload → detect
 1. `POST /upload` (multipart JPEG/PNG ≤10MB) → magic-bytes check
@@ -21,7 +21,7 @@ Cloudflare Workers (prod) or the Next.js rewrite (dev) mount the API under
 3. `GET /images/{id}` serves the stripped bytes (result canvas, thumbnails).
 4. `GET /passport/{id}` renders the EPR PDF on demand (ReportLab).
 
-Uploads are anonymous: `uploader_id = SHA-256(filename + 0.0.0.0 + hour)` —
+Uploads are anonymous: `uploader_id = SHA-256(filename + 0.0.0.0 + hour)` -
 see [auth.md](auth.md). No login, no PII.
 
 ## Project layout
@@ -68,5 +68,5 @@ Key knobs:
 `UNIFIED_CLASSES` order is canonical and load-bearing (YOLO class indices):
 `battery, hard_drive, pcb, motherboard, ram, copper_cable,
 smartphone_device, chip, peripheral_other`. It is duplicated in
-`lib/constants.ts`, `ml/configs/unified_classes.json`, and the test suites —
+`lib/constants.ts`, `ml/configs/unified_classes.json`, and the test suites -
 change all four together.

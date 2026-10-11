@@ -1,4 +1,4 @@
-# ♻️ E-Broker — AI Broker for India's E-Waste
+# ♻️ E-Broker - AI Broker for India's E-Waste
 
 Photograph e-waste → YOLO26 identifies components → Strands AI agent prices
 materials, warns on toxicity, generates EPR passports, and routes sellers to
@@ -50,4 +50,4 @@ Real secrets live in AWS SSM in prod; local dev uses documented dummy values
 only. No credentials of any kind are stored in this repo.
 
 ## License
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

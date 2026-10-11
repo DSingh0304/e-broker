@@ -1,4 +1,4 @@
-# Dockerfile.web — Next.js frontend (production).
+# Dockerfile.web - Next.js frontend (production).
 FROM node:20-alpine
 
 WORKDIR /app

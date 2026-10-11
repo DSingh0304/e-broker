@@ -101,14 +101,14 @@ export default function AdminHome() {
             Deployed Model
           </span>
           <div className="text-3xl font-mono font-bold text-pcb-copper mt-1">
-            {loading ? "..." : stats?.deployed_model ?? "—"}
+            {loading ? "..." : stats?.deployed_model ?? "-"}
           </div>
           <div className="text-xs font-mono text-pcb-gold/70 mt-2">
             mAP50:{" "}
             <span className="font-bold">
               {stats?.map50 !== null && stats?.map50 !== undefined
                 ? (stats.map50 * 100).toFixed(1) + "%"
-                : "—"}
+                : "-"}
             </span>
           </div>
         </div>

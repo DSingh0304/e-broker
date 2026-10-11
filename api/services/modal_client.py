@@ -5,7 +5,7 @@ serverless GPU vendor. ``spawn()`` records a job handle immediately and a
 background coroutine advances the matching TrainingRun row
 (queued → running → done with metrics), so the admin SSE stream and run
 history show real progress from the database. Tests patch
-``api.routers.training.modal_train.spawn`` — that import path is preserved.
+``api.routers.training.modal_train.spawn`` - that import path is preserved.
 """
 import asyncio
 import itertools
@@ -71,7 +71,7 @@ def spawn(*args: Any, **kwargs: Any) -> Any:
         from ml.modal_train import train  # type: ignore
 
         return train.spawn(*args, **kwargs)
-    except Exception as e:  # noqa: BLE001 — GPU vendor optional on this laptop
+    except Exception as e:  # noqa: BLE001 - GPU vendor optional on this laptop
         logger.info("GPU vendor unreachable (%s); running local training job %s", e, job_id)
         return LocalTrainingJob(object_id=job_id)
 

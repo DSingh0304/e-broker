@@ -1,4 +1,4 @@
-// hooks/useAgentStream.ts — SSE stream of Strands agent insights.
+// hooks/useAgentStream.ts - SSE stream of Strands agent insights.
 // Shows detection boxes immediately, then progressively enhances with
 // pricing / toxicity / recyclers / EPR as the agent thinks.
 "use client";

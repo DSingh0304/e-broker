@@ -29,7 +29,7 @@ app = modal.App("ebroker-yolo26")
 VOLUME = modal.Volume.from_name("ebroker-data", create_if_missing=True)
 # Volume-side dataset path. Renamed locally to ebroker_yolo26; the volume dir
 # keeps its old name until the dataset is next re-uploaded (do not rename
-# mid-training — live runs read from here).
+# mid-training - live runs read from here).
 DATA_DIR = "/data/ebroker_yolov8"
 
 image = (

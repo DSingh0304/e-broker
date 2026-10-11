@@ -1,14 +1,14 @@
-# E-Broker — Environment & Secrets Setup
+# E-Broker - Environment & Secrets Setup
 
 Single source of truth for every environment variable, secret, and where it
-lives. The stack runs from **three places** — understand the split before
+lives. The stack runs from **three places** - understand the split before
 touching anything:
 
 | # | Place | Used by | Committed? |
 |---|---|---|---|
-| 1 | `docker-compose.yaml` → per-service `environment:` | Containers (`postgres`, `minio`, `api`, `web`) | **Yes** — dev defaults only |
+| 1 | `docker-compose.yaml` → per-service `environment:` | Containers (`postgres`, `minio`, `api`, `web`) | **Yes** - dev defaults only |
 | 2 | `.env.local` (copy of `.env.local.example`) | Host-side runs: `./venv` backend, `pytest`, `npm run dev`, smoke script | **No** (git-ignored) |
-| 3 | `Dockerfile.web` build `ARG`s (fed from compose `args:`) | Baked into the web image at build time (`NEXT_PUBLIC_*` only) | **Yes** — dev defaults only |
+| 3 | `Dockerfile.web` build `ARG`s (fed from compose `args:`) | Baked into the web image at build time (`NEXT_PUBLIC_*` only) | **Yes** - dev defaults only |
 
 Rules:
 
@@ -19,7 +19,7 @@ Rules:
   `environment:` block. `.env.local` matters only for host-side tooling.
 - `POSTGRES_PASSWORD`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD` apply **only
   on first volume init**. Changing them later without wiping the volume
-  locks you out — rotate via the procedure below, not by editing env.
+  locks you out - rotate via the procedure below, not by editing env.
 - `ADMIN_JWT_BYPASS_TOKEN` / `NEXT_PUBLIC_ADMIN_TOKEN` / `INTERNAL_API_KEY`
   in this repo are **local-dev placeholders**. They must be replaced before
   any non-laptop deployment.
@@ -62,7 +62,7 @@ main README workflow; seeded accounts use per-role passwords
 | `DATABASE_URL` | `api` (async engine, Alembic-online `create_all`, seed) | `postgresql+asyncpg://ebroker:…@postgres:5432/ebroker` (compose) / `@localhost` (host) | Host vs container differ by hostname only |
 | `DATABASE_URL_SYNC` | `api` background training worker (sync engine) | same, `postgresql://` scheme | Requires `psycopg2-binary` (in requirements) |
 
-### S3-compatible storage (Elestio MinIO — not AWS)
+### S3-compatible storage (Elestio MinIO - not AWS)
 
 | Variable | Used by | Dev value | Notes |
 |---|---|---|---|
@@ -154,7 +154,7 @@ sudo docker exec ebroker-postgres psql -U ebroker -d ebroker \
   -c "ALTER USER ebroker WITH PASSWORD 'NEW';"
 # then update compose + .env.local to match and recreate the api container.
 
-# MinIO (no in-place root rotation on this image) — backup, wipe, restore:
+# MinIO (no in-place root rotation on this image) - backup, wipe, restore:
 sudo docker compose stop minio
 sudo docker run --rm -v bharatbuilds_minio-data:/from -v /tmp/minio-bak:/to \
   alpine sh -c "cp -r /from/buckets /to/"

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 // Catch-all backend proxy: /api/* (except deeper routes like /api/auth/*,
 // which Next.js matches first) forwards to FastAPI. Replaces next.config
-// rewrites with a debuggable hop — upstream URL + status are logged and
+// rewrites with a debuggable hop - upstream URL + status are logged and
 // connection failures surface as 502 with the attempted target.
 const HOP_BY_HOP = new Set([
   "connection", "keep-alive", "proxy-authenticate", "proxy-authorization",

@@ -52,7 +52,7 @@ function Giant({ children, stroke }: { children: string; stroke: string }) {
 /* ── Scene 1: Scan ─────────────────────────────────────────── */
 /* Live demo: real YOLOv26 (models/best_yolo26.pt) output on /motherboard.png.
    Normalized xyxy from `ml/predict.py models/best_yolo26.pt motherboard.png`.
-   Strict filter: conf ≥ 0.78 only (6 of 79 raw detections kept) — no clutter.
+   Strict filter: conf ≥ 0.78 only (6 of 79 raw detections kept) - no clutter.
    Stage keeps the exact 2514:2048 image aspect so % boxes align with the
    fitted (not cropped) photo. */
 const DEMO_IMAGE = "/motherboard.png";
@@ -81,7 +81,7 @@ export function ScanScene() {
           </p>
           <div className="relative grid items-center gap-6 lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_300px]">
             <div>
-              <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Move 1 — See everything</p>
+              <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Move 1 - See everything</p>
               <h2 className="mt-2 font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
                 Point. Snap. <span className="text-pcb-accent">Detected.</span>
               </h2>
@@ -136,7 +136,7 @@ export function ScanScene() {
             <div className="flex items-center gap-4 lg:flex-col lg:items-start">
               <MascotSlot className="w-28 shrink-0 sm:w-36 lg:w-full lg:max-w-[280px]" />
               <p className="font-sans text-sm leading-relaxed text-text-secondary sm:text-base">
-                Real run, not a mock — this is your motherboard.png through
+                Real run, not a mock - this is your motherboard.png through
                 YOLOv26. Keep scrolling and watch it lock onto chips across the board.{" "}
                 <Link href="/scan" className="font-bold text-pcb-accent underline underline-offset-4 hover:text-pcb-gold">Try it live</Link>
               </p>
@@ -163,23 +163,23 @@ export function PriceScene() {
               <div className="order-2 flex items-center gap-4 lg:order-1 lg:flex-col lg:items-start">
                 <MascotSlot className="w-28 shrink-0 sm:w-36 lg:w-full lg:max-w-[280px]" />
                 <p className="font-sans text-sm leading-relaxed text-[#33463D] sm:text-base">
-                  Live rates, toxicity flags, EPR passport — the number you see is the number the
+                  Live rates, toxicity flags, EPR passport - the number you see is the number the
                   market pays. Scroll to count it up.
                 </p>
               </div>
               <div className="order-1 lg:order-2">
-                <p className="font-display text-xs font-bold uppercase tracking-widest text-[#8A5A26]">Move 2 — Know its worth</p>
+                <p className="font-display text-xs font-bold uppercase tracking-widest text-[#8A5A26]">Move 2 - Know its worth</p>
                 <p aria-hidden="true" className="mt-2 font-display text-[22vw] font-bold leading-none tracking-tight sm:text-7xl lg:text-8xl">
                   ₹{min}–₹{max}
                   <span className="text-2xl text-[#5A6E63] lg:text-3xl">/kg</span>
                 </p>
                 <p className="mt-2 font-sans text-sm text-[#33463D]">
-                  Live band, refreshed with commodity rates — the spread is the market&apos;s
+                  Live band, refreshed with commodity rates - the spread is the market&apos;s
                   day-range, not our uncertainty.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2" style={{ opacity: windowed(p, 0.55, 0.2) }}>
                   <span className="rounded-full bg-[#B42318]/10 px-4 py-1.5 font-sans text-xs font-bold text-[#B42318]">
-                    Hazard: lead — route certified
+                    Hazard: lead - route certified
                   </span>
                   <span className="rounded-full bg-[#1E7A4C]/10 px-4 py-1.5 font-sans text-xs font-bold text-[#1E7A4C]" style={{ opacity: windowed(p, 0.7, 0.2) }}>
                     EPR passport ready
@@ -209,7 +209,7 @@ export function SellScene() {
           <Giant stroke="rgba(217,140,83,0.25)">03</Giant>
           <p className="sr-only">Three vendor bids arrive on a 12.5 kilo lot; the top offer of 2600 rupees is accepted.</p>
           <div className="relative">
-            <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Move 3 — Cash it in</p>
+            <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Move 3 - Cash it in</p>
             <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
               Bids roll in. <span className="text-pcb-accent">You pick.</span>
             </h2>
@@ -217,7 +217,7 @@ export function SellScene() {
               <div className="flex items-center gap-4 lg:flex-col lg:items-start">
                 <MascotSlot className="w-28 shrink-0 sm:w-36 lg:w-full lg:max-w-[260px]" />
                 <p className="font-sans text-sm leading-relaxed text-text-secondary sm:text-base">
-                  12.5 kg mixed lot, Gulabi Bagh. Watch the offers land — then accept the best.
+                  12.5 kg mixed lot, Gulabi Bagh. Watch the offers land - then accept the best.
                   <Link href="/vendor/market" className="font-bold text-pcb-accent underline underline-offset-4 hover:text-pcb-gold"> See the market</Link>
                 </p>
               </div>
@@ -239,7 +239,7 @@ export function SellScene() {
                   className="inline-block -rotate-3 rounded-lg border-2 border-brand-green px-5 py-2 font-display text-sm font-bold uppercase tracking-widest text-brand-green"
                   style={{ opacity: windowed(p, 0.78, 0.12), transform: `scale(${0.7 + 0.3 * windowed(p, 0.78, 0.12)}) rotate(-3deg)` }}
                 >
-                  ✓ Offer accepted — pickup scheduled
+                  ✓ Offer accepted - pickup scheduled
                 </p>
               </div>
             </div>
@@ -290,7 +290,7 @@ export function ProofScene() {
               })}
             </dl>
             <p className="mt-6 font-sans text-sm text-text-secondary">
-              Human-in-the-loop retraining runs on every approved label — see the{" "}
+              Human-in-the-loop retraining runs on every approved label - see the{" "}
               <Link href="/admin/training" className="underline underline-offset-4 hover:text-pcb-gold">training pipeline</Link>.
             </p>
           </div>
@@ -319,7 +319,7 @@ export function RolesScene() {
                   className="flex flex-col rounded-2xl border-2 border-[#8A5A26] bg-[#0F3B2C] p-6 text-pcb-gold sm:p-8"
                   style={{ opacity: windowed(p, 0.05, 0.25), transform: `translateX(${(1 - windowed(p, 0.05, 0.25)) * -60}px)` }}
                 >
-                  <h3 className="font-display text-xl font-bold uppercase text-pcb-accent">Kabadiwalas — sell</h3>
+                  <h3 className="font-display text-xl font-bold uppercase text-pcb-accent">Kabadiwalas - sell</h3>
                   <p className="mt-2 font-sans text-sm text-text-secondary">Scan scrap, publish lots by weight, accept the best offer from your inbox.</p>
                   <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
                     <Link href="/scan" className="underline underline-offset-4 hover:text-white">Scan</Link>
@@ -341,7 +341,7 @@ export function RolesScene() {
                   className="flex flex-col rounded-2xl border-2 border-[#8A5A26] bg-[#FFFBF0] p-6 sm:p-8"
                   style={{ opacity: windowed(p, 0.2, 0.25), transform: `translateX(${(1 - windowed(p, 0.2, 0.25)) * 60}px)` }}
                 >
-                  <h3 className="font-display text-xl font-bold uppercase text-[#A05A1E]">Vendors — buy</h3>
+                  <h3 className="font-display text-xl font-bold uppercase text-[#A05A1E]">Vendors - buy</h3>
                   <p className="mt-2 font-sans text-sm text-[#33463D]">Browse live lots with detected materials, bid, track every offer in one place.</p>
                   <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
                     <Link href="/vendor/market" className="underline underline-offset-4 hover:text-black">Market</Link>

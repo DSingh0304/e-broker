@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/setup-ollama.sh — Setup and pull Ollama gemma4 model
+# scripts/setup-ollama.sh - Setup and pull Ollama gemma4 model
 set -euo pipefail
 
 echo "=== Setting up Ollama for E-Broker ==="
