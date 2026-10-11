@@ -1,0 +1,4 @@
+name,address,city,state,lat,lng,phone,cpcb_reg_no,accepts
+EcoRecycle Delhi,Okhla Industrial Area Phase II,Delhi,Delhi,28.5355,77.2743,+91-9876543210,CPCB/DEL/001,battery;pcb;motherboard
+GreenTech Recyclers,IMT Manesar,Gurgaon,Haryana,28.3670,76.9390,+91-9812345678,CPCB/HR/014,hard_drive;copper_cable;peripheral_other
+EcoCircle,Dwarka Sector 6,Delhi,Delhi,28.5921,77.0460,+91-9911223344,CPCB/DEL/022,smartphone_device;ram;chip

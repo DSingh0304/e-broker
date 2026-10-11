@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: E-Broker Backend APIs (dev defaults; prod via samconfig)
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 1024
+    Architectures:
+      - arm64
+    Environment:
+      Variables:
+        SSM_PREFIX: /ebroker/dev/
+
+Resources:
+  EbrokerApiGateway:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: dev
+
+  PublicApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: public.ecr.aws/lambda/python:3.12-arm64
+      Metadata:
+        Dockerfile: ../../api/Dockerfile.api
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModelWithResponseStream
+                - bedrock:InvokeModel
+              Resource:
+                - arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-pro-v1:0
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /api/v1/{proxy+}
+            Method: ANY
+            ApiId: !Ref EbrokerApiGateway
+
+  AdminApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: public.ecr.aws/lambda/python:3.12-arm64
+      Metadata:
+        Dockerfile: ../../api/Dockerfile.admin
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /api/admin/{proxy+}
+            Method: ANY
+            ApiId: !Ref EbrokerApiGateway
+
+  InternalApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: public.ecr.aws/lambda/python:3.12-arm64
+      Metadata:
+        Dockerfile: ../../api/Dockerfile.internal
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /api/internal/{proxy+}
+            Method: ANY
+            ApiId: !Ref EbrokerApiGateway
+
+Outputs:
+  ApiUrl:
+    Value: !Sub https://${EbrokerApiGateway}.execute-api.${AWS::Region}.amazonaws.com

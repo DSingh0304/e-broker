@@ -1,0 +1,9 @@
+version = 0.1
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "ebroker-dev"
+resolve_s3 = true
+capabilities = "CAPABILITY_IAM"
+region = "ap-south-1"
+confirm_changeset = false

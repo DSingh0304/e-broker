@@ -1,0 +1,20 @@
+# Keep image contexts small and reproducible. Models are copied explicitly
+# by api/Dockerfile.local, so only exclude dev artefacts here.
+node_modules
+.next
+.venv
+venv
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.git
+logs
+test-results
+playwright-report
+dataset
+data_processed
+runs
+.ollama_home
+*.log
+.DS_Store
