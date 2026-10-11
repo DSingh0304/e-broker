@@ -14,6 +14,7 @@ services:
       test: ["CMD", "pg_isready", "-U", "ebroker"]
       interval: 5s
       retries: 5
+    restart: unless-stopped
 
   # S3-compatible object storage (Elestio MinIO). boto3 speaks the S3 API
   # against this endpoint - no AWS service dependency.
@@ -32,6 +33,7 @@ services:
       interval: 5s
       retries: 10
       start_period: 15s
+    restart: unless-stopped
 
   api:
     build:
