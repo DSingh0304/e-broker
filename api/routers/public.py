@@ -66,14 +66,14 @@ async def scan_url(payload: ScanUrlIn, db: AsyncSession = Depends(get_db)):
     SSRF guard, then run it through the normal upload pipeline."""
     url = payload.url.strip()
     if not url:
-        raise HTTPException(400, "URL is empty — paste a direct image link")
+        raise HTTPException(400, "URL is empty - paste a direct image link")
     if not await asyncio.to_thread(is_safe_url, url):
         raise HTTPException(400, "URL host is not allowed")
     try:
         async with httpx.AsyncClient(timeout=10.0, follow_redirects=True) as client:
             resp = await client.get(url)
     except Exception:  # noqa: BLE001 - DNS/TLS/connection failures
-        raise HTTPException(400, "Could not fetch that URL — check the link")
+        raise HTTPException(400, "Could not fetch that URL - check the link")
     if resp.status_code != 200:
         raise HTTPException(400, f"URL returned HTTP {resp.status_code}")
     ctype = (resp.headers.get("content-type") or "").split(";")[0].strip().lower()
@@ -156,7 +156,7 @@ async def _geo_recyclers(
         return out
 
     # Fallback chain: in-radius + material, in-radius, then nearest
-    # overall — a search always returns somewhere to go.
+    # overall - a search always returns somewhere to go.
     out = collect(radius_km, True)
     if not out:
         out = collect(radius_km, False)
@@ -191,7 +191,7 @@ async def serve_image(image_id: str, db: AsyncSession = Depends(get_db)):
         data = storage.get_object(img.s3_key)
     except FileNotFoundError as e:
         raise HTTPException(422, str(e))
-    # Upload bytes are immutable for an id — browsers/CDN may cache for a year.
+    # Upload bytes are immutable for an id - browsers/CDN may cache for a year.
     return Response(content=data, media_type="image/jpeg",
                     headers={"Cache-Control": "public, max-age=31536000, immutable"})
 
@@ -209,7 +209,7 @@ async def epr_passport(image_id: str, db: AsyncSession = Depends(get_db)):
     buf = io.BytesIO()
     pdf = Canvas(buf, pagesize=A4)
     pdf.setFont("Helvetica-Bold", 18)
-    pdf.drawString(60, 800, "E-Broker — Digital Waste Passport (EPR)")
+    pdf.drawString(60, 800, "E-Broker - Digital Waste Passport (EPR)")
     pdf.setFont("Helvetica", 11)
     pdf.drawString(60, 775, f"Passport ID: EPR-{img.id[:8].upper()}")
     pdf.drawString(60, 758, f"Uploader: {img.uploader_id[:16]}…  Date: {img.uploaded_at:%Y-%m-%d}")

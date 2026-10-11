@@ -61,7 +61,7 @@ export default function ModelsPage() {
   const activeCandidate = candidates[0];
 
   const fmtPct = (v: number | null | undefined) =>
-    v === null || v === undefined ? "—" : `${(v * 100).toFixed(1)}%`;
+    v === null || v === undefined ? "-" : `${(v * 100).toFixed(1)}%`;
 
   return (
     <div className="space-y-6">
@@ -105,7 +105,7 @@ export default function ModelsPage() {
           <div className="text-right">
             <span className="text-xs font-mono text-pcb-copper">mAP50 Baseline</span>
             <div className="text-2xl font-mono font-bold text-status-success">
-              {deployed?.map50 !== null && deployed?.map50 !== undefined ? (deployed.map50 * 100).toFixed(1) + "%" : "—"}
+              {deployed?.map50 !== null && deployed?.map50 !== undefined ? (deployed.map50 * 100).toFixed(1) + "%" : "-"}
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function ModelsPage() {
                         <td className="py-2 font-bold text-pcb-silver capitalize">{cls}</td>
                         <td className="py-2 text-pcb-gold/70">{fmtPct(oldVal)}</td>
                         <td className="py-2 font-bold text-pcb-gold">{fmtPct(newVal)}</td>
-                        <td className="py-2 font-bold text-pcb-gold/50">—</td>
+                        <td className="py-2 font-bold text-pcb-gold/50">-</td>
                       </tr>
                     );
                   }
@@ -208,7 +208,7 @@ export default function ModelsPage() {
       ) : candidatesNoMetric.length > 0 ? (
         <div className="rounded bg-surface-1 p-6 text-center border border-pcb-copper/20">
           <p className="text-xs font-mono text-pcb-gold/60">
-            {candidatesNoMetric.length} recorded version(s) have no evaluation metrics yet —
+            {candidatesNoMetric.length} recorded version(s) have no evaluation metrics yet -
             they appear here once training reports mAP scores.
           </p>
         </div>

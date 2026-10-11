@@ -1,4 +1,4 @@
-"""SQLAlchemy ORM — merged ARCHITECTURE.md §6 + Implementation Plan tables."""
+"""SQLAlchemy ORM - merged ARCHITECTURE.md §6 + Implementation Plan tables."""
 import uuid
 from datetime import datetime, timezone
 

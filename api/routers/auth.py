@@ -11,7 +11,7 @@ from api.db.models import User
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 # Public self-registration is limited to marketplace roles. ADMIN accounts are
-# created via seeding or by an existing admin — never by open signup.
+# created via seeding or by an existing admin - never by open signup.
 SELF_REGISTER_ROLES = {"KABADIWALA", "VENDOR"}
 
 

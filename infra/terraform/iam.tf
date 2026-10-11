@@ -1,4 +1,4 @@
-# E-Broker Bedrock access — Strands agent (Nova Pro) invoke-only.
+# E-Broker Bedrock access - Strands agent (Nova Pro) invoke-only.
 # Lambda execution roles are SAM-managed (infra/sam/template.yaml);
 # this managed policy documents the least-privilege grant and can be
 # attached to the SAM-created role via the role name/output.

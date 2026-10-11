@@ -1,6 +1,6 @@
 import os
 
-# Real env beats .env.local in pydantic-settings — pin test credentials
+# Real env beats .env.local in pydantic-settings - pin test credentials
 # BEFORE any api.* import instantiates Settings.
 os.environ["ADMIN_JWT_BYPASS"] = "true"
 os.environ["ADMIN_JWT_BYPASS_TOKEN"] = "admin-test-token"

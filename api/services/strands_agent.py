@@ -1,5 +1,5 @@
 """
-E-Broker Strands Agent — wires 6 tools to Amazon Nova Pro via Bedrock.
+E-Broker Strands Agent - wires 6 tools to Amazon Nova Pro via Bedrock.
 
 Backwards-compatible: keeps legacy `run_agent`, `get_scrap_price`,
 `assess_toxicity`, `generate_epr_passport`, `find_recyclers` exports used
@@ -23,14 +23,14 @@ _SYSTEM_PROMPT = """
 You are E-Broker's AI analyst for e-waste scrap dealers (kababdiwalas) in India.
 You receive a list of e-waste components detected by a computer vision model in an image.
 
-Your job — follow this sequence strictly:
+Your job - follow this sequence strictly:
 1. For EVERY detected component class, call get_scrap_price and assess_toxicity.
 2. For any hazardous or caution component, call get_material_handling_rules.
 3. Call find_recyclers once with the provided lat/lng.
 4. Call get_exchange_rate for USD if gold-bearing components are detected
    (pcb, chip, motherboard, ram).
 5. Call generate_epr_summary once at the very end with all detected classes.
-6. Output ONLY a valid JSON object — no prose, no markdown fences.
+6. Output ONLY a valid JSON object - no prose, no markdown fences.
 
 The final response must be valid JSON with this exact schema:
 {
@@ -124,7 +124,7 @@ async def _mock_stream(
     lat: float = 28.6139,
     lng: float = 77.209,
 ) -> AsyncIterator[str]:
-    """Deterministic local stream — no Bedrock. Used when AGENT_MOCK=true."""
+    """Deterministic local stream - no Bedrock. Used when AGENT_MOCK=true."""
     from api.services.agent_cache import query_recyclers
 
     start = time.monotonic()

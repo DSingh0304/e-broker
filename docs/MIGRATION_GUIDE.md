@@ -99,8 +99,8 @@ E-Broker was migrated from an AWS-dependent serverless architecture (Lambda, Bed
 ### 3.2 Authentication & User Model Overhaul
 - **Database Schema:** Added `password_hash VARCHAR(255)` to `users` in `infra/sql/init.sql` and `api/db/models.py`.
 - **Backend Auth Router:** Created `api/routers/auth.py` providing:
-  - `POST /auth/register` — Validates role, checks existing email, hashes password with PBKDF2-SHA256, stores user.
-  - `POST /auth/login` — Verifies password, returns user profile and roles.
+  - `POST /auth/register` - Validates role, checks existing email, hashes password with PBKDF2-SHA256, stores user.
+  - `POST /auth/login` - Verifies password, returns user profile and roles.
 - **Frontend Auth Integration:**
   - Consolidated NextAuth in `lib/auth.ts` with credentials provider calling `POST /auth/login`.
   - Resolved Next.js App Router constraint by keeping `app/api/auth/[...nextauth]/route.ts` strictly exporting HTTP handlers (`GET`, `POST`).

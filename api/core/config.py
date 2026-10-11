@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     DATABASE_URL_SYNC: str = "postgresql://ebroker:ebroker_dev_password@localhost:5432/ebroker"
 
     # S3-compatible object storage (Elestio MinIO in compose, AWS S3 in cloud).
-    # boto3 speaks the S3 API against either endpoint — no AWS dependency.
+    # boto3 speaks the S3 API against either endpoint - no AWS dependency.
     AWS_ENDPOINT_URL: str | None = "http://localhost:9000"
     AWS_ACCESS_KEY_ID: str = "minioadmin"
     AWS_SECRET_ACCESS_KEY: str = "minioadmin123"
@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     S3_BUCKET: str = "ebroker-images"
     S3_MODEL_BUCKET: str = "ebroker-models"
 
-    # Auth — local bypass ONLY when ADMIN_JWT_BYPASS=true (never in prod)
+    # Auth - local bypass ONLY when ADMIN_JWT_BYPASS=true (never in prod)
     ADMIN_JWT_BYPASS: bool = True
     ADMIN_JWT_BYPASS_TOKEN: str = "admin-test-token"
     ADMIN_BYPASS_EMAIL: str = "admin@test.com"
@@ -58,13 +58,13 @@ class Settings(BaseSettings):
     OLLAMA_MODEL: str = "gemma4:31b-cloud"
 
     # Metals pricing is a static reference table now (api/core/metal_prices.py)
-    # — the metals.dev free tier is exhausted, so no live key is configured.
+    # - the metals.dev free tier is exhausted, so no live key is configured.
     METALS_API_KEY: str = ""
     METALS_API_URL: str = "https://api.metals.dev/v1/latest"
     METALS_API_CURRENCY: str = "INR"
     METALS_API_UNIT: str = "g"
 
-    # Exchange rate (exchangerate-api.com free tier — 1500 req/month)
+    # Exchange rate (exchangerate-api.com free tier - 1500 req/month)
     EXCHANGE_RATE_API_KEY: str = ""
     EXCHANGE_RATE_API_URL: str = "https://v6.exchangerate-api.com/v6/{key}/latest/USD"
 

@@ -39,7 +39,7 @@ export default function QueuePage() {
       await approveQueueItem(imageId);
       removeFromList(imageId);
     } catch {
-      setActionError("Could not approve that item — it is still in the queue. Try again.");
+      setActionError("Could not approve that item - it is still in the queue. Try again.");
     }
   };
 
@@ -49,7 +49,7 @@ export default function QueuePage() {
       await skipQueueItem(imageId);
       removeFromList(imageId);
     } catch {
-      setActionError("Could not skip that item — it is still in the queue. Try again.");
+      setActionError("Could not skip that item - it is still in the queue. Try again.");
     }
   };
 

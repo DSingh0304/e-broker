@@ -21,11 +21,11 @@ function stepIndex(stage: Stage): number {
 function GuideTip({ stage }: { stage: Stage }) {
   const tip =
     stage === "preview"
-      ? "Looks sharp? Analyze it — or retake if it's blurry or dark."
+      ? "Looks sharp? Analyze it - or retake if it's blurry or dark."
       : stage === "analyzing"
         ? "Reading every component. This usually takes a few seconds."
         : stage === "error"
-          ? "That didn't go through. Your photo is safe — try again."
+          ? "That didn't go through. Your photo is safe - try again."
           : "Good light and a flat lay is all Kabadi needs.";
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-pcb-copper/40 bg-black/25 p-4">
@@ -95,7 +95,7 @@ export default function ScanPage() {
       setPhase("done");
       router.push(`/result/${imageId}`);
     } catch {
-      setError("Upload failed. Check your connection, then try again — your photo is still here.");
+      setError("Upload failed. Check your connection, then try again - your photo is still here.");
       setStage("error");
     }
   };
@@ -269,7 +269,7 @@ export default function ScanPage() {
 
           {stage === "camera" && (
             <p className="font-sans text-sm text-text-secondary">
-              Point at your scrap and tap capture — you&apos;ll review the photo before anything uploads.
+              Point at your scrap and tap capture - you&apos;ll review the photo before anything uploads.
             </p>
           )}
 

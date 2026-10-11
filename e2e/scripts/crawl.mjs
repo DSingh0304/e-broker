@@ -1,4 +1,4 @@
-// e2e/scripts/crawl.mjs — visit every frontend route in Chromium (desktop +
+// e2e/scripts/crawl.mjs - visit every frontend route in Chromium (desktop +
 // mobile), log console errors, page errors, failed requests and bad statuses.
 // Usage: node e2e/scripts/crawl.mjs
 import { chromium, devices } from "@playwright/test";
@@ -47,7 +47,7 @@ async function crawl(browser, name, state, routes, viewport) {
     });
     page.on("pageerror", (e) => errors.push(`pageerror: ${e.message.slice(0, 160)}`));
     page.on("requestfailed", (r) => {
-      // Next.js RSC prefetches (?_rsc=) abort on navigation/close — noise.
+      // Next.js RSC prefetches (?_rsc=) abort on navigation/close - noise.
       // SSE agent streams are long-lived by design; abort-on-teardown is noise.
       const url = r.url().replace(BASE, "");
       const aborted = r.failure()?.errorText === "net::ERR_ABORTED";
@@ -63,7 +63,7 @@ async function crawl(browser, name, state, routes, viewport) {
       await page.goto(`${BASE}${route}`, { waitUntil: "networkidle", timeout: 30000 });
       if (route.startsWith("/result/")) {
         // Wait for the agent SSE to reach a terminal state instead of an
-        // arbitrary sleep — proves the stream delivers in-browser.
+        // arbitrary sleep - proves the stream delivers in-browser.
         await page
           .waitForFunction(
             () =>

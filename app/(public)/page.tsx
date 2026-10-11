@@ -36,7 +36,7 @@ export default function LandingPage() {
           <div className="space-y-6">
             <p className="inline-flex items-center gap-2 rounded-full border border-[#0F3B2C]/30 bg-white/40 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-widest text-[#0F3B2C]">
               <span aria-hidden className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#1E7A4C]" />
-              System online — v2.0.4
+              System online - v2.0.4
             </p>
             <h1 className="text-balance text-4xl font-bold leading-[1.05] text-[#132019] md:text-5xl lg:text-6xl">
               Decode the <span className="text-[#A05A1E]">value</span> of e-waste
@@ -80,7 +80,7 @@ export default function LandingPage() {
           href="#scene-scan"
           className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 font-sans text-xs uppercase tracking-widest text-[#5A6E63] hover:text-[#132019] md:flex"
         >
-          Scroll — the film starts
+          Scroll - the film starts
           <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="motion-safe:animate-bounce">
             <path d="M3 6l5 5 5-5" />
           </svg>
@@ -97,7 +97,7 @@ export default function LandingPage() {
       {/* ── Finale ──────────────────────────────────────────── */}
       <section aria-label="Get started" className="flex min-h-screen flex-col items-center justify-center bg-pcb-accent px-4 py-20 text-center text-pcb-green">
         <h2 className="mx-auto max-w-2xl text-balance text-3xl font-bold md:text-4xl">Ready to turn scrap into revenue?</h2>
-        <p className="mx-auto mb-8 mt-3 max-w-xl font-sans font-medium">Create an account to list lots and receive vendor bids — or scan right now, no account needed.</p>
+        <p className="mx-auto mb-8 mt-3 max-w-xl font-sans font-medium">Create an account to list lots and receive vendor bids - or scan right now, no account needed.</p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link href="/scan" className="inline-block rounded bg-pcb-green px-10 py-4 font-sans font-bold text-pcb-gold shadow-[4px_4px_0px_#C0C0C0] hover:bg-pcb-trace">
             Scan now

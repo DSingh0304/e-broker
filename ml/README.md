@@ -13,7 +13,7 @@
 **Current merged total: 15,991 images / ~80k instances -> 9 unified classes**
 (trcproject 1,682 + pc_parts 2,930 + balanced_ewaste 7,211 + pcb_components 2,047
 + electrocom61_yolo 2,121). Ready to fine-tune `yolo26m` on Modal. Note: `chip`
-holds ~57k dense tiny boxes (macro-PCB domain) — monitor whole-object recall
+holds ~57k dense tiny boxes (macro-PCB domain) - monitor whole-object recall
 separately; use `--sources trcproject pc_parts balanced_ewaste electrocom61_yolo`
 for a whole-object-only variant.
 

@@ -30,7 +30,7 @@ export function HazardAlert({ detections }: Props) {
         {hazards.map((d) => (
           <li key={d.id}>
             <span className="capitalize">{d.className}</span> contains{" "}
-            {d.toxicity?.notes ?? "hazardous materials"} — do not incinerate. Requires a certified e-waste
+            {d.toxicity?.notes ?? "hazardous materials"} - do not incinerate. Requires a certified e-waste
             recycler.
           </li>
         ))}

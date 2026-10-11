@@ -40,9 +40,9 @@ function scoutPicks(listings: MarketListing[]): ScoutPick[] {
       picks.push({ listing: l, reason });
     }
   };
-  if (hot && hot.bid_count > 0) take(hot, `Hottest lot — ${hot.bid_count} bids and counting`);
-  if (fresh) take(fresh, "Just listed — first look before the crowd");
-  if (overlooked) take(overlooked, "No bids yet — open near asking and it can be yours");
+  if (hot && hot.bid_count > 0) take(hot, `Hottest lot - ${hot.bid_count} bids and counting`);
+  if (fresh) take(fresh, "Just listed - first look before the crowd");
+  if (overlooked) take(overlooked, "No bids yet - open near asking and it can be yours");
   return picks.slice(0, 3);
 }
 
@@ -66,11 +66,11 @@ function CompactInsight({ listing, myTop }: { listing: MarketListing; myTop: num
     if (myTop >= listing.top_bid) return <span className="font-bold text-[#1E7A4C]">You lead this lot</span>;
     return (
       <span>
-        Outbid at {inr(myTop)} — <span className="font-bold text-[#B42318]">top is {inr(listing.top_bid)}</span>
+        Outbid at {inr(myTop)} - <span className="font-bold text-[#B42318]">top is {inr(listing.top_bid)}</span>
       </span>
     );
   }
-  if (listing.bid_count === 0) return <span>Fresh lot — no competition yet</span>;
+  if (listing.bid_count === 0) return <span>Fresh lot - no competition yet</span>;
   return (
     <span>
       {listing.bid_count} bid{listing.bid_count === 1 ? "" : "s"}
@@ -83,11 +83,11 @@ function BidCoach({ listing, myTop }: { listing: MarketListing; myTop: number | 
   if (myTop !== null && listing.top_bid !== null && myTop >= listing.top_bid) {
     line = `You lead at ${inr(myTop)}. Nothing to do but wait for the seller.`;
   } else if (myTop !== null && listing.top_bid !== null) {
-    line = `You bid ${inr(myTop)}, but the top bid is ${inr(listing.top_bid)} — go above it to retake the lead.`;
+    line = `You bid ${inr(myTop)}, but the top bid is ${inr(listing.top_bid)} - go above it to retake the lead.`;
   } else if (listing.bid_count === 0) {
     line = listing.asking_price
       ? `No bids yet. Open at or below the ${inr(listing.asking_price)} asking price.`
-      : "No bids yet — name your price.";
+      : "No bids yet - name your price.";
   } else {
     line = `${listing.bid_count} bid${listing.bid_count === 1 ? "" : "s"} so far${listing.top_bid ? `, top ${inr(listing.top_bid)}` : ""}. Beat the top to lead.`;
   }
@@ -271,7 +271,7 @@ export default function VendorMarket() {
         setMyBids(await fetchMyBids(identity));
       }
     } catch {
-      setLoadError("Could not load the market. Check your connection and retry — your bids are safe.");
+      setLoadError("Could not load the market. Check your connection and retry - your bids are safe.");
     }
   };
 
@@ -362,7 +362,7 @@ export default function VendorMarket() {
 
   const placeBid = async (listing: MarketListing) => {
     if (!identity || !isVendor) {
-      setFormError("Bidding needs a vendor account — sign in as a vendor first.");
+      setFormError("Bidding needs a vendor account - sign in as a vendor first.");
       return;
     }
     const value = Number(drafts[listing.id]);
@@ -371,7 +371,7 @@ export default function VendorMarket() {
       return;
     }
     if (listing.top_bid !== null && value <= listing.top_bid) {
-      setFormError(`That is below the top bid — bid more than ${inr(listing.top_bid)} to lead.`);
+      setFormError(`That is below the top bid - bid more than ${inr(listing.top_bid)} to lead.`);
       return;
     }
     setPlacing(true);
@@ -382,7 +382,7 @@ export default function VendorMarket() {
       setOpenBid(null);
       await reload();
     } catch {
-      setFormError("Bid failed — the lot may just have sold. The feed is refreshed below.");
+      setFormError("Bid failed - the lot may just have sold. The feed is refreshed below.");
       await reload();
     } finally {
       setPlacing(false);
@@ -461,7 +461,7 @@ export default function VendorMarket() {
             {listings === null
               ? "Loading lots…"
               : visible.length === 0
-                ? "No lots match — loosen a filter."
+                ? "No lots match - loosen a filter."
                 : `Showing ${visible.length} lot${visible.length === 1 ? "" : "s"}`}
           </p>
         </div>
@@ -531,7 +531,7 @@ export default function VendorMarket() {
                       <button
                         type="button"
                         onClick={() => {
-                          // Picks ignore active filters — clear anything hiding the lot, then go to it.
+                          // Picks ignore active filters - clear anything hiding the lot, then go to it.
                           setQuery("");
                           setMaterial("");
                           setHideMine(false);
@@ -597,7 +597,7 @@ export default function VendorMarket() {
                 <div>
                   <p className="font-display text-lg font-bold">Nothing on this shelf</p>
                   <p className="mt-1 font-sans text-sm text-[#5A6E63]">
-                    No open lots match those filters. Clear them or check back —
+                    No open lots match those filters. Clear them or check back -
                     kabadiwalas list new lots every day.
                   </p>
                 </div>
@@ -684,7 +684,7 @@ export default function VendorMarket() {
                             </div>
                             <p className="shrink-0 text-right">
                               <span className="block font-display text-2xl font-bold tabular-nums text-[#0F3B2C]">
-                                {l.asking_price ? inr(l.asking_price) : "—"}
+                                {l.asking_price ? inr(l.asking_price) : "-"}
                               </span>
                               <span className="block font-sans text-xs text-[#5A6E63]">asking</span>
                             </p>

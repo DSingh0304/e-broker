@@ -118,7 +118,7 @@ export default function RecyclersPage() {
           </div>
           <div className="hidden shrink-0 items-center gap-3 md:flex">
             <p className="max-w-[200px] rounded-2xl rounded-br-sm border border-[#B87333]/50 bg-black/25 px-3 py-2 text-xs leading-relaxed">
-              Kabadi routes only to certified recyclers — open a row and call or WhatsApp them directly.
+              Kabadi routes only to certified recyclers - open a row and call or WhatsApp them directly.
             </p>
             <Mascot className="h-24 w-20" />
           </div>
@@ -168,7 +168,7 @@ export default function RecyclersPage() {
             {recyclers == null
               ? "Loading recyclers…"
               : filtered.length === 0
-                ? "No matches — try a different search or material."
+                ? "No matches - try a different search or material."
                 : `Showing ${filtered.length} of ${recyclers.length}`}
           </p>
         </div>
@@ -183,7 +183,7 @@ export default function RecyclersPage() {
                 Could not load recyclers
               </p>
               <p className="mt-1 text-sm text-[#5A6E63]">
-                Check your connection and try again — your search is kept.
+                Check your connection and try again - your search is kept.
               </p>
               <button
                 type="button"
@@ -228,7 +228,7 @@ export default function RecyclersPage() {
                     <p className="font-display text-lg font-bold">Nothing in the ledger matches</p>
                     <p className="mt-1 text-sm text-[#5A6E63]">
                       No certified recycler matches that search. Clear the filters or
-                      try a nearby city — new recyclers join every week.
+                      try a nearby city - new recyclers join every week.
                     </p>
                     {(query || accepts) && (
                       <button
@@ -288,7 +288,7 @@ export default function RecyclersPage() {
                         {active && (
                           <div className="border-l-4 border-[#B87333] bg-[#FFFBF0] px-4 py-4 sm:px-5">
                             <p className="text-sm text-[#33463D]">
-                              {r.address} — {r.city}, {r.state}
+                              {r.address} - {r.city}, {r.state}
                             </p>
                             {acceptsList.length > 0 && (
                               <ul aria-label="Accepted materials" className="mt-2 flex flex-wrap gap-1.5">

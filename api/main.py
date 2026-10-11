@@ -32,11 +32,11 @@ def health_check():
     return {"status": "ok"}
 
 
-# Lambda adapter — optional, created AFTER the app exists. Docker/Uvicorn
+# Lambda adapter - optional, created AFTER the app exists. Docker/Uvicorn
 # never touches this; it is only used by the api/Dockerfile.api image.
 try:
     from mangum import Mangum
 
     handler = Mangum(app, lifespan="off")
-except Exception:  # noqa: BLE001 — mangum not installed in Docker
+except Exception:  # noqa: BLE001 - mangum not installed in Docker
     handler = None

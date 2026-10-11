@@ -1,7 +1,7 @@
 """S3-compatible object storage (MinIO in Docker Compose, AWS S3 in cloud).
 
 boto3 speaks the S3 HTTP API against either endpoint, so this module has no
-AWS service dependency — point AWS_ENDPOINT_URL at MinIO for local production.
+AWS service dependency - point AWS_ENDPOINT_URL at MinIO for local production.
 Callers must tolerate connection errors; uploads fall back to a bounded
 in-process store so scans keep working if storage restarts.
 """
@@ -44,11 +44,11 @@ def ensure_bucket(client, bucket: str) -> None:
     except ClientError as e:
         if int(e.response.get("ResponseMetadata", {}).get("HTTPStatusCode", 0)) not in (400, 403, 404):
             raise
-    except Exception as exc:  # noqa: BLE001 — endpoint unreachable, bucket likely missing
+    except Exception as exc:  # noqa: BLE001 - endpoint unreachable, bucket likely missing
         log.debug("head_bucket failed, will attempt create: %s", exc)
     try:
         client.create_bucket(Bucket=bucket)
-    except Exception:  # noqa: BLE001 — retry with AWS-style constraint below
+    except Exception:  # noqa: BLE001 - retry with AWS-style constraint below
         # Real AWS requires a LocationConstraint outside us-east-1.
         client.create_bucket(
             Bucket=bucket,
@@ -92,7 +92,7 @@ def put_object(key: str, data: bytes, content_type: str = "image/jpeg") -> str:
         client.put_object(Bucket=settings.S3_BUCKET, Key=key, Body=data, ContentType=content_type)
         base = (settings.AWS_ENDPOINT_URL or f"https://{settings.S3_BUCKET}.s3.amazonaws.com").rstrip("/")
         return f"{base}/{settings.S3_BUCKET}/{key}"
-    except Exception as exc:  # noqa: BLE001 — storage may be restarting
+    except Exception as exc:  # noqa: BLE001 - storage may be restarting
         log.warning("Object storage unreachable, using fallback store: %s", exc)
         _fallback_put(key, data)
         return f"s3://{settings.S3_BUCKET}/{key}"
@@ -118,7 +118,7 @@ def get_object(key: str) -> bytes:
     try:
         resp = s3_client().get_object(Bucket=settings.S3_BUCKET, Key=key)
         return resp["Body"].read()
-    except Exception:  # noqa: BLE001 — try fallback before giving up
+    except Exception:  # noqa: BLE001 - try fallback before giving up
         if key in _fallback:
             return _fallback[key]
         raise FileNotFoundError(f"s3://{settings.S3_BUCKET}/{key} unavailable")

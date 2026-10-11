@@ -27,7 +27,7 @@ async def trigger(db: AsyncSession = Depends(get_db),
     new_labels = (await db.execute(
         select(func.count()).select_from(Label).where(Label.is_active.is_(True))
     )).scalar() or 0
-    # Only recent queued/running rows block a new trigger — seeded or crashed
+    # Only recent queued/running rows block a new trigger - seeded or crashed
     # runs from previous sessions go stale after 6h and stop blocking.
     stale_after = datetime.now(timezone.utc) - timedelta(hours=6)
     active = (await db.execute(select(func.count()).select_from(TrainingRun).where(
@@ -41,7 +41,7 @@ async def trigger(db: AsyncSession = Depends(get_db),
     if not should_trigger_training(int(new_labels), settings.TRAINING_TRIGGER_THRESHOLD):
         raise HTTPException(
             422,
-            f"Not enough new labels: {int(new_labels)} / {settings.TRAINING_TRIGGER_THRESHOLD} — "
+            f"Not enough new labels: {int(new_labels)} / {settings.TRAINING_TRIGGER_THRESHOLD} - "
             "approve more annotations in the review queue first",
         )
     call = modal_train.spawn()

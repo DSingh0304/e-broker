@@ -1,4 +1,4 @@
-"""Label CRUD logic — approval state machine."""
+"""Label CRUD logic - approval state machine."""
 import pytest
 
 from api.services.label_service import (

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// GET /api/internal/training/trigger-check — server-side proxy that injects
+// GET /api/internal/training/trigger-check - server-side proxy that injects
 // the internal key, so the browser never carries X-Internal-Key secrets.
 export async function GET() {
   const apiHost =

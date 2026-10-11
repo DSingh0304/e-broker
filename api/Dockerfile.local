@@ -1,4 +1,4 @@
-# api/Dockerfile.local — Production API image (standard Python, no Lambda).
+# api/Dockerfile.local - Production API image (standard Python, no Lambda).
 FROM python:3.12-slim AS base
 
 WORKDIR /app

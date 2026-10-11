@@ -55,7 +55,7 @@ export function ReviewCard({ item, focused, onApprove, onSkip, onCorrect }: Prop
         </ul>
         {lowConf && (
           <p className="mt-1 text-xs font-medium text-brand-amber">
-            Low confidence — needs review
+            Low confidence - needs review
           </p>
         )}
         <div className="mt-2 flex gap-2">

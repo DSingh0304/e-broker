@@ -1,4 +1,4 @@
-# S3 module — uploads + Object-Locked models bucket
+# S3 module - uploads + Object-Locked models bucket
 resource "aws_s3_bucket" "uploads" {
   bucket = "${var.project}-uploads-${var.region}"
 }

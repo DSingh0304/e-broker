@@ -1,4 +1,4 @@
-# RDS module — PostgreSQL 16 (db.t4g.micro Single-AZ) + RDS Proxy
+# RDS module - PostgreSQL 16 (db.t4g.micro Single-AZ) + RDS Proxy
 resource "aws_db_parameter_group" "ebroker" {
   name   = "${var.project}-pg16"
   family = "postgres16"

@@ -2,7 +2,7 @@
 
 Demo-grade identity: the Next.js client sends the signed-in user's phone and
 role (from the NextAuth session) as X-User-Phone / X-User-Role headers. The
-backend resolves-or-creates a `users` row by phone — real persistence, demo
+backend resolves-or-creates a `users` row by phone - real persistence, demo
 trust. Prod would verify a Cognito JWT instead.
 """
 from __future__ import annotations
@@ -74,7 +74,7 @@ async def get_demo_user(
         raise HTTPException(400, "X-User-Role must be KABADIWALA, VENDOR, ADMIN or RECYCLER")
     phone = (x_user_phone or "").strip()
     if not phone:
-        raise HTTPException(401, "Missing X-User-Phone — sign in first")
+        raise HTTPException(401, "Missing X-User-Phone - sign in first")
     user = (await db.execute(select(User).where(User.phone_number == phone))).scalar_one_or_none()
     if user is None:
         user = User(phone_number=phone, role=role,
@@ -103,7 +103,7 @@ async def _listing_payload(listing: MarketplaceListing, db: AsyncSession) -> dic
         "seller_name": seller.full_name if seller else None,
         "seller_phone": seller.phone_number if seller else None,
         "image_id": listing.image_id,
-        # Browsers can't reach storage directly — stream bytes via the API.
+        # Browsers can't reach storage directly - stream bytes via the API.
         "image_url": f"/api/images/{listing.image_id}",
         "materials": sorted(set(dets)),
         "total_weight_kg": listing.total_weight_kg,
@@ -124,7 +124,7 @@ async def create_listing(
     _require_role(user, "KABADIWALA")
     img = (await db.execute(select(Image).where(Image.id == listing.image_id))).scalar_one_or_none()
     if img is None:
-        raise HTTPException(404, "Image not found — scan it first")
+        raise HTTPException(404, "Image not found - scan it first")
     row = MarketplaceListing(seller_id=user.id, image_id=listing.image_id,
                              total_weight_kg=listing.total_weight_kg,
                              asking_price=listing.asking_price, status="ACTIVE")
@@ -171,7 +171,7 @@ async def submit_bid(
     if listing is None:
         raise HTTPException(404, "Listing not found")
     if listing.status != "ACTIVE":
-        raise HTTPException(409, f"Listing is {listing.status} — no longer accepting bids")
+        raise HTTPException(409, f"Listing is {listing.status} - no longer accepting bids")
     if listing.seller_id == user.id:
         raise HTTPException(400, "Cannot bid on your own listing")
     row = Bid(listing_id=listing.id, vendor_id=user.id,
@@ -266,7 +266,7 @@ async def seller_overview(
     user: User = Depends(get_demo_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Seller dashboard stats — all from live DB rows."""
+    """Seller dashboard stats - all from live DB rows."""
     listings = (await db.execute(
         select(MarketplaceListing).where(MarketplaceListing.seller_id == user.id)
     )).scalars().all()

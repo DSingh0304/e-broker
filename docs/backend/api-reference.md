@@ -33,7 +33,7 @@ recycler footer. `404` unknown image.
 
 ### `GET /admin/queue?page=&status=pending`
 `200 {items[{imageId, thumbnailUrl, detections[{className, confidence}],
-reviewStatus, uploadedAt}], total}` — 50/page, newest first.
+reviewStatus, uploadedAt}], total}` - 50/page, newest first.
 
 ### `GET /admin/queue/{image_id}`
 `200 {imageId, reviewStatus, thumbnailUrl}` · `404`.

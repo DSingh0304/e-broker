@@ -11,7 +11,7 @@ export function MetricsChart({ data }: { data?: Record<string, number> | null })
   if (rows.length === 0) {
     return (
       <p className="py-8 text-center text-xs font-mono text-pcb-gold/60">
-        No per-class metrics recorded yet — they appear after the first
+        No per-class metrics recorded yet - they appear after the first
         evaluated training run.
       </p>
     );

@@ -1,6 +1,6 @@
-# E-Broker — Strands Agent: Complete Implementation Plan & Code
+# E-Broker - Strands Agent: Complete Implementation Plan & Code
 
-**Status:** Approved design — implement exactly this  
+**Status:** Approved design - implement exactly this  
 **Decisions locked:** English-only · SSE streaming · Free metals API · DB recycler query · Same `ebroker-api` Lambda
 
 ---
@@ -11,7 +11,7 @@
 | File | Purpose |
 |------|---------|
 | `api/services/strands_tools.py` | All 6 tool implementations (real logic, validated I/O) |
-| `api/services/strands_agent.py` | **Replace** placeholder — real AWS Strands SDK agent |
+| `api/services/strands_agent.py` | **Replace** placeholder - real AWS Strands SDK agent |
 | `api/services/agent_cache.py` | Read/write cached agent results to DB |
 | `api/routers/agent.py` | SSE streaming + polling endpoints |
 
@@ -23,7 +23,7 @@
 | `api/main.py` | Mount `agent.router` |
 | `api/core/config.py` | Add `METALS_API_KEY`, `AGENT_TIMEOUT_S` settings |
 | `api/requirements.txt` | Add `strands-agents`, `sse-starlette` |
-| `api/routers/public.py` | `detect` no longer calls `run_agent` — agent is now on-demand |
+| `api/routers/public.py` | `detect` no longer calls `run_agent` - agent is now on-demand |
 
 ### Architectural shift
 
@@ -39,7 +39,7 @@ GET  /agent/{id}/result → poll fallback: returns cached agent JSON from DB
 ```
 
 This means the frontend can show detection boxes **immediately** after `detect`,
-then open the SSE stream for the AI insights — progressive enhancement.
+then open the SSE stream for the AI insights - progressive enhancement.
 
 ---
 
@@ -50,7 +50,7 @@ The current `Recycler` model is missing critical fields for meaningful filtering
 ### 1a. Updated `Recycler` ORM model
 
 ```python
-# api/db/models.py — replace the existing Recycler class
+# api/db/models.py - replace the existing Recycler class
 
 class Recycler(Base):
     """
@@ -71,7 +71,7 @@ class Recycler(Base):
     email: Mapped[str | None] = mapped_column(String(128), nullable=True)      # NEW
     website: Mapped[str | None] = mapped_column(String(256), nullable=True)    # NEW
     cpcb_reg_no: Mapped[str | None] = mapped_column(String(64), nullable=True)
-    cpcb_valid_until: Mapped[datetime | None] = mapped_column(             # NEW — expiry check
+    cpcb_valid_until: Mapped[datetime | None] = mapped_column(             # NEW - expiry check
         DateTime(timezone=True), nullable=True
     )
     accepts: Mapped[list | None] = mapped_column(JSON, nullable=True)
@@ -170,12 +170,12 @@ class AgentResult(Base):
 ```python
 # Add to the Settings class:
 
-# Metals pricing (metals-dev.com free tier — 1000 req/month)
+# Metals pricing (metals-dev.com free tier - 1000 req/month)
 # Get key at: https://metals-dev.com → free plan, no CC required
 METALS_API_KEY: str = ""
 METALS_API_URL: str = "https://api.metals.dev/v1/latest"
 
-# Exchange rate (exchangerate-api.com free tier — 1500 req/month)
+# Exchange rate (exchangerate-api.com free tier - 1500 req/month)
 EXCHANGE_RATE_API_KEY: str = ""
 EXCHANGE_RATE_API_URL: str = "https://v6.exchangerate-api.com/v6/{key}/latest/USD"
 
@@ -187,24 +187,24 @@ BEDROCK_REGION: str = "us-east-1"
 
 ---
 
-## 3. `api/services/strands_tools.py` — All 6 Tools
+## 3. `api/services/strands_tools.py` - All 6 Tools
 
 ```python
 """
 E-Broker Strands tool implementations.
 
 Each function is decorated with @tool (strands_agents.tools.tool).
-Input validation happens inside each tool body — the LLM cannot bypass
+Input validation happens inside each tool body - the LLM cannot bypass
 these checks even via prompt injection because we validate class_name
 against UNIFIED_CLASSES before any logic runs.
 
 Tool taxonomy:
-  get_scrap_price           — INR price band per material class
-  assess_toxicity           — hazard level + E-Waste Rules 2016 notes
-  find_recyclers            — DB geo-query, filtered by accepted material
-  generate_epr_summary      — passport ID + compliance summary text
-  get_exchange_rate         — USD → INR spot rate
-  get_material_handling_rules — regulatory rules + penalties
+  get_scrap_price           - INR price band per material class
+  assess_toxicity           - hazard level + E-Waste Rules 2016 notes
+  find_recyclers            - DB geo-query, filtered by accepted material
+  generate_epr_summary      - passport ID + compliance summary text
+  get_exchange_rate         - USD → INR spot rate
+  get_material_handling_rules - regulatory rules + penalties
 """
 from __future__ import annotations
 
@@ -223,7 +223,7 @@ from api.core.config import UNIFIED_CLASSES, settings
 _LAT_MIN, _LAT_MAX = 6.0, 37.5
 _LNG_MIN, _LNG_MAX = 68.0, 98.0
 
-# INR/kg static bands — used when METALS_API_KEY is empty or API is down.
+# INR/kg static bands - used when METALS_API_KEY is empty or API is down.
 # Source: typical Delhi NCR scrap market rates (Oct 2024 baseline).
 _PRICE_BANDS: dict[str, tuple[float, float, str]] = {
     "battery":           (45,   65,   "kg"),
@@ -241,15 +241,15 @@ _PRICE_BANDS: dict[str, tuple[float, float, str]] = {
 _TOXICITY: dict[str, dict] = {
     "battery": {
         "level": "hazardous",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 5",
-        "hazards": ["Lead-acid / Lithium — corrosive, flammable"],
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 5",
+        "hazards": ["Lead-acid / Lithium - corrosive, flammable"],
         "safe_handling": "Do not incinerate, puncture or acid-strip. "
                          "Requires certified Battery Waste Management Rules recycler.",
         "penalty": "Up to ₹1 lakh fine under E-Waste Rules 2016 Rule 16.",
     },
     "hard_drive": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 1",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 1",
         "hazards": ["Lead solder on PCB", "Beryllium in voice coil (some models)"],
         "safe_handling": "Dismantle with gloves. No open burning. "
                          "Data-wipe required before disposal (IT Act 2000).",
@@ -257,15 +257,15 @@ _TOXICITY: dict[str, dict] = {
     },
     "pcb": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead solder", "Brominated Flame Retardants (BFR)", "Gold/Palladium traces"],
-        "safe_handling": "No open burning — BFR releases dioxins. "
+        "safe_handling": "No open burning - BFR releases dioxins. "
                          "Sell to CPCB-certified precious metal refiner.",
         "penalty": "Criminal liability under EPA 1986 Sec 15.",
     },
     "motherboard": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead solder", "BFR", "Cadmium in some capacitors"],
         "safe_handling": "No acid baths. Mechanical dismantling only. "
                          "Separate heat-sinks (aluminium) for higher scrap value.",
@@ -275,37 +275,37 @@ _TOXICITY: dict[str, dict] = {
         "level": "caution",
         "regulation": "E-Waste Rules 2016, Schedule I",
         "hazards": ["Lead solder", "Gold-plated contacts"],
-        "safe_handling": "Handle with gloves. High value — avoid acid cleaning. "
+        "safe_handling": "Handle with gloves. High value - avoid acid cleaning. "
                          "Sell directly to certified refiner for gold recovery.",
         "penalty": "Fine under EPA 1986.",
     },
     "copper_cable": {
         "level": "safe",
-        "regulation": "Not specifically scheduled — standard scrap metal rules.",
+        "regulation": "Not specifically scheduled - standard scrap metal rules.",
         "hazards": ["PVC insulation releases HCl/dioxins if burned"],
-        "safe_handling": "Strip mechanically — NEVER burn PVC insulation. "
+        "safe_handling": "Strip mechanically - NEVER burn PVC insulation. "
                          "Bare copper commands premium price.",
         "penalty": "Burning PVC in urban areas: ₹500–5000 municipal fine.",
     },
     "smartphone_device": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 2",
-        "hazards": ["Lithium-ion battery — fire/explosion risk", "Tantalum capacitors"],
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 2",
+        "hazards": ["Lithium-ion battery - fire/explosion risk", "Tantalum capacitors"],
         "safe_handling": "Do not puncture battery. Discharge fully before dismantling. "
-                         "Remove battery first — it commands separate scrap price.",
+                         "Remove battery first - it commands separate scrap price.",
         "penalty": "Fine under EPA 1986 and Battery Waste Management Rules 2022.",
     },
     "chip": {
         "level": "caution",
-        "regulation": "E-Waste Rules 2016, Schedule I — Category 12",
+        "regulation": "E-Waste Rules 2016, Schedule I - Category 12",
         "hazards": ["Lead/tin solder", "Arsenic in some compound semiconductors"],
         "safe_handling": "No acid baths without PPE. Sell to certified IC refiner. "
-                         "High precious metal content — do not mix with general scrap.",
+                         "High precious metal content - do not mix with general scrap.",
         "penalty": "Fine under EPA 1986.",
     },
     "peripheral_other": {
         "level": "safe",
-        "regulation": "E-Waste Rules 2016 — general category.",
+        "regulation": "E-Waste Rules 2016 - general category.",
         "hazards": ["Mixed materials; check sub-components"],
         "safe_handling": "Route via any CPCB-certified e-waste collector.",
         "penalty": "Standard e-waste disposal non-compliance fine.",
@@ -478,7 +478,7 @@ async def find_recyclers(
     rows = get_sync_recyclers(lat, lng, radius_km, accepts_class)
 
     if not rows:
-        # Static fallback for demo — always returns something
+        # Static fallback for demo - always returns something
         rows = [
             {
                 "name": "EcoRecycle India Pvt Ltd", "city": "Delhi",
@@ -539,7 +539,7 @@ def generate_epr_summary(
         "compliance_text": (
             f"This batch of {len(valid_classes)} e-waste component type(s) has been "
             f"identified via AI vision and registered for compliant disposal. "
-            f"{'HAZARDOUS materials present — requires CPCB-certified recycler. ' if hazardous else ''}"
+            f"{'HAZARDOUS materials present - requires CPCB-certified recycler. ' if hazardous else ''}"
             f"Passport ID: {passport_id}. Valid under E-Waste (Management) Rules 2016."
         ),
         "authority": "Central Pollution Control Board (CPCB), India",
@@ -554,7 +554,7 @@ async def get_exchange_rate(
     """
     Returns the current exchange rate to Indian Rupees (INR).
     Call for USD equivalent when gold-bearing components (pcb, ram, chip,
-    motherboard) are detected — export/refiner buyers quote in USD.
+    motherboard) are detected - export/refiner buyers quote in USD.
     """
     from_currency = from_currency.upper().strip()
     ALLOWED = {"USD", "EUR", "GBP", "CNY", "JPY", "AED"}
@@ -600,12 +600,12 @@ def get_material_handling_rules(
 
 ---
 
-## 4. `api/services/agent_cache.py` — DB Helpers
+## 4. `api/services/agent_cache.py` - DB Helpers
 
 ```python
 """
 Agent result caching: read/write AgentResult rows.
-Also provides get_sync_recyclers() — a sync DB call used inside tools.
+Also provides get_sync_recyclers() - a sync DB call used inside tools.
 
 Design: tools run synchronously inside the Strands agent event loop.
 We use SQLAlchemy's sync engine for DB calls inside tools to avoid
@@ -622,7 +622,7 @@ from sqlalchemy.orm import Session
 from api.core.config import settings
 from api.db.models import AgentResult, Recycler
 
-# Sync engine — used only inside tool calls
+# Sync engine - used only inside tool calls
 _sync_engine = create_engine(
     settings.DATABASE_URL_SYNC,
     pool_size=2,
@@ -642,7 +642,7 @@ def _haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
 def get_sync_recyclers(
     lat: float, lng: float, radius_km: float, accepts_class: str | None,
 ) -> list[dict]:
-    """Sync DB query — safe to call from within a Strands tool."""
+    """Sync DB query - safe to call from within a Strands tool."""
     with Session(_sync_engine) as session:
         rows = session.execute(
             select(Recycler).where(Recycler.verified == True)  # noqa: E712
@@ -709,18 +709,18 @@ async def save_error(image_id: str, error: str, partial: dict | None, db) -> Non
 
 ---
 
-## 5. `api/services/strands_agent.py` — Real Strands SDK Agent
+## 5. `api/services/strands_agent.py` - Real Strands SDK Agent
 
 ```python
 """
-E-Broker Strands Agent — wires 6 tools to Amazon Nova Pro via Bedrock.
+E-Broker Strands Agent - wires 6 tools to Amazon Nova Pro via Bedrock.
 
 Key design choices:
   - Agent singleton: created ONCE per Lambda cold-start. Strands agents are
     stateless per invocation so the singleton is safe under concurrent requests.
   - Streaming: agent.stream_async() yields AgentEvent objects translated to
     SSE-compatible dicts in the router layer.
-  - System prompt is a static constant — never user-controllable.
+  - System prompt is a static constant - never user-controllable.
   - 25-second timeout: asyncio.timeout() wraps the stream to guarantee
     we return before Lambda's 30s hard kill.
 """
@@ -748,20 +748,20 @@ from api.services.strands_tools import (
 
 log = logging.getLogger("ebroker.agent")
 
-# ── System prompt (static — never modified by user input) ────────────────────
+# ── System prompt (static - never modified by user input) ────────────────────
 
 _SYSTEM_PROMPT = """
 You are E-Broker's AI analyst for e-waste scrap dealers (kababdiwalas) in India.
 You receive a list of e-waste components detected by a computer vision model in an image.
 
-Your job — follow this sequence strictly:
+Your job - follow this sequence strictly:
 1. For EVERY detected component class, call get_scrap_price and assess_toxicity.
 2. For any hazardous or caution component, call get_material_handling_rules.
 3. Call find_recyclers once with the provided lat/lng.
 4. Call get_exchange_rate for USD if gold-bearing components are detected
    (pcb, chip, motherboard, ram).
 5. Call generate_epr_summary once at the very end with all detected classes.
-6. Output ONLY a valid JSON object — no prose, no markdown fences.
+6. Output ONLY a valid JSON object - no prose, no markdown fences.
 
 The final response must be valid JSON with this exact schema:
 {
@@ -806,7 +806,7 @@ def _get_agent() -> Agent:
             model_id=settings.AGENT_MODEL_ID,
             client=bedrock_client,
             streaming=True,
-            max_tokens=2048,    # hard cap — prevents runaway cost
+            max_tokens=2048,    # hard cap - prevents runaway cost
         )
         _agent = Agent(
             model=model,
@@ -842,12 +842,12 @@ async def stream_agent_events(
     Async generator yielding SSE-formatted strings.
 
     SSE event types emitted:
-      status      — lifecycle: started | done | partial | error
-      text_delta  — incremental LLM text between tool calls
-      tool_call   — {name, input} — agent about to call a tool
-      tool_result — {name, output} — tool returned a result
-      result      — {data: AgentResult, duration_ms} — final structured output
-      error       — {message} — error detail
+      status      - lifecycle: started | done | partial | error
+      text_delta  - incremental LLM text between tool calls
+      tool_call   - {name, input} - agent about to call a tool
+      tool_result - {name, output} - tool returned a result
+      result      - {data: AgentResult, duration_ms} - final structured output
+      error       - {message} - error detail
     """
     agent = _get_agent()
     start = time.monotonic()
@@ -921,14 +921,14 @@ async def stream_agent_events(
 
 ---
 
-## 6. `api/routers/agent.py` — SSE Endpoint + Polling Fallback
+## 6. `api/routers/agent.py` - SSE Endpoint + Polling Fallback
 
 ```python
 """
 Agent router:
 
-  GET /agent/{image_id}/stream  — SSE stream of agent thinking + result
-  GET /agent/{image_id}/result  — JSON polling fallback
+  GET /agent/{image_id}/stream  - SSE stream of agent thinking + result
+  GET /agent/{image_id}/result  - JSON polling fallback
 
 Cache behaviour:
   - status=done → instant replay from DB (no Bedrock)
@@ -938,7 +938,7 @@ Cache behaviour:
 Security:
   - image_id validated as UUID before DB query
   - lat/lng validated as India bounding box via FastAPI Query()
-  - No user text accepted — only structured query params
+  - No user text accepted - only structured query params
   - WAF rate limit: 20 req/5min per IP on /agent/* (configured separately)
 """
 from __future__ import annotations
@@ -1162,7 +1162,7 @@ from api.routers import admin, agent, public, training  # add agent
 app.include_router(agent.router, tags=["agent"])        # add after public/admin
 ```
 
-### 7b. `api/core/database.py` — expose `async_session_factory`
+### 7b. `api/core/database.py` - expose `async_session_factory`
 
 ```python
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
@@ -1175,10 +1175,10 @@ async def get_db():
         yield session
 ```
 
-### 7c. `api/routers/public.py` — simplify `detect` response
+### 7c. `api/routers/public.py` - simplify `detect` response
 
 ```python
-# detect() return value — remove pricing/toxicity from insights call,
+# detect() return value - remove pricing/toxicity from insights call,
 # add agentStreamUrl so frontend knows where to connect:
 return {
     "imageId": image_id,
@@ -1195,19 +1195,19 @@ return {
 # Also remove: import strands_agent, call to run_agent(), insights variable
 ```
 
-### 7d. `api/requirements.txt` — add two lines
+### 7d. `api/requirements.txt` - add two lines
 
 ```
-strands-agents>=0.1        # AWS Strands SDK (already present — verify version)
+strands-agents>=0.1        # AWS Strands SDK (already present - verify version)
 sse-starlette>=2.1         # optional SSE helper (we use StreamingResponse directly)
 ```
 
 ---
 
-## 8. IAM — Bedrock Access (Terraform)
+## 8. IAM - Bedrock Access (Terraform)
 
 ```hcl
-# infra/terraform/iam.tf — add to ebroker-api-role
+# infra/terraform/iam.tf - add to ebroker-api-role
 
 resource "aws_iam_role_policy" "bedrock_invoke" {
   name = "ebroker-api-bedrock-invoke"
@@ -1221,7 +1221,7 @@ resource "aws_iam_role_policy" "bedrock_invoke" {
         "bedrock:InvokeModelWithResponseStream",
         "bedrock:InvokeModel",
       ]
-      # Scoped to exactly the one model — not bedrock:*
+      # Scoped to exactly the one model - not bedrock:*
       Resource = [
         "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-pro-v1:0",
         "arn:aws:bedrock:us-east-1::foundation-model/us.amazon.nova-pro-v1:0",
@@ -1231,7 +1231,7 @@ resource "aws_iam_role_policy" "bedrock_invoke" {
 }
 ```
 
-SAM `template.yaml` — add to `EbrokerApiFunction` policies:
+SAM `template.yaml` - add to `EbrokerApiFunction` policies:
 
 ```yaml
 - Statement:
@@ -1249,15 +1249,15 @@ SAM `template.yaml` — add to `EbrokerApiFunction` policies:
 
 | Threat | Mitigation |
 |--------|-----------|
-| Prompt injection via image | Image bytes never enter the prompt — only structured detection JSON |
+| Prompt injection via image | Image bytes never enter the prompt - only structured detection JSON |
 | Prompt injection via tool output | Tool outputs are validated against known schemas before returning to LLM |
 | Runaway Bedrock cost | `max_tokens=2048`; 25s hard timeout; WAF rate limit 20 req/5min on /agent/* |
-| PII in LLM prompts | `uploader_id` is SHA-256 hash — no name/email/phone ever sent to Bedrock |
+| PII in LLM prompts | `uploader_id` is SHA-256 hash - no name/email/phone ever sent to Bedrock |
 | LLM off-topic responses | System prompt hard guard: "Never discuss topics unrelated to e-waste" |
 | Invalid location data | lat/lng validated as India bounding box in FastAPI `Query()` |
 | Duplicate Bedrock calls | Cache: if `status=done`, instant DB replay; if `status=streaming`, 409 |
 | Lambda timeout | `asyncio.timeout(25)` yields `partial` before Lambda kills at 30s |
-| Recycler data poisoning | `verified=True` filter — only admin-approved recyclers returned |
+| Recycler data poisoning | `verified=True` filter - only admin-approved recyclers returned |
 | SSRF via external API calls | Only allowlisted domains called: `api.metals.dev`, `v6.exchangerate-api.com` |
 
 ---
@@ -1335,7 +1335,7 @@ export function useAgentStream(imageId: string, lat: number, lng: number) {
 ### Unit tests (`api/tests/unit/test_strands_tools.py`)
 
 ```python
-"""Unit tests for all 6 Strands tools — no Bedrock, no DB, no network."""
+"""Unit tests for all 6 Strands tools - no Bedrock, no DB, no network."""
 import pytest
 from unittest.mock import patch
 
@@ -1394,7 +1394,7 @@ async def test_find_recyclers_returns_static_fallback_when_db_empty():
 
 @pytest.mark.asyncio
 async def test_find_recyclers_corrects_out_of_india_coords():
-    """Coords outside India bounding box should not raise — defaults to Delhi."""
+    """Coords outside India bounding box should not raise - defaults to Delhi."""
     with patch("api.services.agent_cache.get_sync_recyclers", return_value=[]):
         result = await find_recyclers.func(51.5, -0.1, 50.0, None)  # London
     assert result["recyclers"] is not None
@@ -1466,7 +1466,7 @@ async def test_invalid_image_id_returns_400(client):
 # infra/sam/template.yaml
 EbrokerApiFunction:
   Properties:
-    MemorySize: 1024   # was 512 — Strands SDK + boto3 Bedrock adds ~80MB RSS
+    MemorySize: 1024   # was 512 - Strands SDK + boto3 Bedrock adds ~80MB RSS
 ```
 
 > [!NOTE]
@@ -1484,7 +1484,7 @@ aws ssm put-parameter \
   --name /ebroker/agent/model-id \
   --value "us.amazon.nova-pro-v1:0" --type String
 
-# Optional — leave empty to use static price bands
+# Optional - leave empty to use static price bands
 aws ssm put-parameter \
   --name /ebroker/metals-api-key \
   --value "<key_from_metals-dev.com>" --type SecureString
@@ -1498,7 +1498,7 @@ aws ssm put-parameter \
 
 `us.amazon.nova-pro-v1:0` runs in `us-east-1`. Lambda in `ap-south-1` calls
 cross-region via the NAT Gateway (Bedrock has no PrivateLink in `ap-south-1`
-yet). Adds ~220ms per stream — acceptable for demo. No infrastructure change
+yet). Adds ~220ms per stream - acceptable for demo. No infrastructure change
 needed; `ebroker-api-role` already has NAT egress in the existing config.
 
 ### Local dev (no Bedrock)

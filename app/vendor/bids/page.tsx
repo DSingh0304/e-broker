@@ -23,8 +23,8 @@ function groupOf(b: MarketBid, lot: MarketListing | undefined): Group | null {
 }
 
 const GROUPS: { key: Group; title: string; hint: string }[] = [
-  { key: "leading", title: "Leading", hint: "Top bid is yours — hold position." },
-  { key: "outbid", title: "Outbid", hint: "Someone passed you — raise from the market." },
+  { key: "leading", title: "Leading", hint: "Top bid is yours - hold position." },
+  { key: "outbid", title: "Outbid", hint: "Someone passed you - raise from the market." },
   { key: "decided", title: "Decided", hint: "Won or closed." },
 ];
 
@@ -170,7 +170,7 @@ export default function VendorBids() {
                     <div>
                       <p className="font-display text-lg font-bold">No bids yet</p>
                       <p className="mt-1 font-sans text-sm text-[#5A6E63]">
-                        Browse the market and place your first offer — it lands here with live position.
+                        Browse the market and place your first offer - it lands here with live position.
                       </p>
                       <Link
                         href="/vendor/market"
@@ -240,7 +240,7 @@ export default function VendorBids() {
                                         )}
                                       </>
                                     ) : b.status === "ACCEPTED" ? (
-                                      <span className="font-bold text-[#1E7A4C]">Won — seller accepted</span>
+                                      <span className="font-bold text-[#1E7A4C]">Won - seller accepted</span>
                                     ) : (
                                       <>Closed · {b.status.toLowerCase()}</>
                                     )}

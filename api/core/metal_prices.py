@@ -1,7 +1,7 @@
 """Static metal reference prices (INR per gram).
 
 The metals.dev free tier is exhausted, so live spot lookups are disabled.
-Pricing below is a reviewed snapshot — update the values and REFERENCE_DATE
+Pricing below is a reviewed snapshot - update the values and REFERENCE_DATE
 together when refreshing from a market source. All agent valuations derive
 from these constants, so quotes stay deterministic and testable.
 """

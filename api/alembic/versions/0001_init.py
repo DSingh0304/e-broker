@@ -1,4 +1,4 @@
-"""Initial schema — mirrors api.db.models (Alembic-managed going forward)."""
+"""Initial schema - mirrors api.db.models (Alembic-managed going forward)."""
 revision = "0001_init"
 down_revision = None
 

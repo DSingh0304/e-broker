@@ -34,7 +34,7 @@ def verify_password(password: str, stored: str | None) -> bool:
             return hmac.compare_digest(digest.hex(), hash_hex)
         except (ValueError, TypeError):
             return False
-    # Legacy unsalted SHA-256 (early seeds) — accepted, upgraded on login.
+    # Legacy unsalted SHA-256 (early seeds) - accepted, upgraded on login.
     return hmac.compare_digest(hashlib.sha256(password.encode()).hexdigest(), stored)
 
 

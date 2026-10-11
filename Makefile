@@ -1,17 +1,17 @@
-# E-Broker — Local Development Bootstrap
+# E-Broker - Local Development Bootstrap
 # ════════════════════════════════════════════════════════════════
 # Usage:
-#   make dev          — start all local services (Floci + Postgres + API)
-#   make sam-local    — start Lambda locally via SAM CLI
-#   make test-unit    — unit tests only (no I/O)
-#   make test-int     — integration tests (requires `make dev` running)
-#   make e2e          — full E2E with Playwright
-#   make migrate      — run Alembic migrations against local DB
-#   make seed-recyclers — populate recyclers table from CSV
-#   make lint         — ruff + mypy + eslint + tsc
-#   make build-images — build all 3 Lambda container images locally
-#   make deploy-dev   — SAM deploy to AWS dev stage
-#   make floci-setup  — create S3 buckets + SSM params in local Floci
+#   make dev          - start all local services (Floci + Postgres + API)
+#   make sam-local    - start Lambda locally via SAM CLI
+#   make test-unit    - unit tests only (no I/O)
+#   make test-int     - integration tests (requires `make dev` running)
+#   make e2e          - full E2E with Playwright
+#   make migrate      - run Alembic migrations against local DB
+#   make seed-recyclers - populate recyclers table from CSV
+#   make lint         - ruff + mypy + eslint + tsc
+#   make build-images - build all 3 Lambda container images locally
+#   make deploy-dev   - SAM deploy to AWS dev stage
+#   make floci-setup  - create S3 buckets + SSM params in local Floci
 
 .PHONY: dev sam-local test-unit test-int e2e migrate lint build-images
 .DEFAULT_GOAL := dev
@@ -90,7 +90,7 @@ deploy-dev:
 		--config-env dev \
 		--no-confirm-changeset
 
-# ── IaC validation (OpenTofu via Docker — no system install) ──
+# ── IaC validation (OpenTofu via Docker - no system install) ──
 tofu-validate:
 	docker run --rm -v "$(PWD)/infra/terraform:/tf" -w /tf \
 		ghcr.io/opentofu/opentofu:latest init -backend=false

@@ -1,4 +1,4 @@
-# VPC module — 3-tier: public (NAT) / private (Lambda) / isolated (RDS)
+# VPC module - 3-tier: public (NAT) / private (Lambda) / isolated (RDS)
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"

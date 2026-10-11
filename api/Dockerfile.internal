@@ -1,4 +1,4 @@
-# api/Dockerfile.internal — HMAC webhook Lambda
+# api/Dockerfile.internal - HMAC webhook Lambda
 FROM public.ecr.aws/lambda/python:3.12-arm64 AS base
 RUN yum install -y gcc libjpeg-devel zlib-devel && yum clean all
 COPY api/requirements.txt ${LAMBDA_TASK_ROOT}/

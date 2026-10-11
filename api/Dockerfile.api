@@ -1,4 +1,4 @@
-# api/Dockerfile.api — public Lambda (x86_64) + local dev stage
+# api/Dockerfile.api - public Lambda (x86_64) + local dev stage
 FROM public.ecr.aws/lambda/python:3.12-x86_64 AS base
 RUN dnf install -y gcc libjpeg-devel zlib-devel && dnf clean all
 COPY api/requirements.txt ${LAMBDA_TASK_ROOT}/

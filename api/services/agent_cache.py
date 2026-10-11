@@ -19,7 +19,7 @@ def _haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
     return 6371 * 2 * math.asin(min(1.0, math.sqrt(a)))
 
 
-# Public alias — the HTTP route uses the async session directly.
+# Public alias - the HTTP route uses the async session directly.
 haversine_km = _haversine_km
 
 

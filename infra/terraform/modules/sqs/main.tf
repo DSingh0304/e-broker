@@ -1,4 +1,4 @@
-# SQS module — FIFO inference queue (+ DLQ)
+# SQS module - FIFO inference queue (+ DLQ)
 resource "aws_sqs_queue" "inference_dlq" {
   name = "${var.project}-inference-dlq.fifo"
   fifo_queue = true
