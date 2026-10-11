@@ -34,10 +34,6 @@ export default function LandingPage() {
 
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
           <div className="space-y-6">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#0F3B2C]/30 bg-white/40 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-widest text-[#0F3B2C]">
-              <span aria-hidden className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#1E7A4C]" />
-              System online - v2.0.4
-            </p>
             <h1 className="text-balance text-4xl font-bold leading-[1.05] text-[#132019] md:text-5xl lg:text-6xl">
               Decode the <span className="text-[#A05A1E]">value</span> of e-waste
             </h1>
@@ -70,7 +66,7 @@ export default function LandingPage() {
             </dl>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[420px] lg:max-w-[520px]">
+          <div className="relative mx-auto mt-10 w-full max-w-[420px] lg:mt-0 lg:max-w-[480px] lg:pr-2">
             <div aria-hidden className="absolute left-1/2 top-1/2 h-4/5 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#B87333]/30 blur-3xl" />
             <MascotSlot className="relative mx-auto" />
           </div>

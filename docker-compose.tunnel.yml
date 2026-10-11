@@ -1,0 +1,6 @@
+# Tunnel deployment overlay — public domains via Cloudflare Tunnel.
+# Usage: docker --context default compose -f docker-compose.yaml -f docker-compose.tunnel.yml up -d web
+services:
+  web:
+    environment:
+      NEXTAUTH_URL: https://e-broker.ysinghc.in
