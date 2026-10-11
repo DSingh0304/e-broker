@@ -301,6 +301,17 @@ export function ProofScene() {
 }
 
 /* ── Scene 5: Roles (two doors) ────────────────────────────── */
+const SELL_STEPS = [
+  { n: "01", title: "Scan the pile", text: "AI names every component in seconds." },
+  { n: "02", title: "Weigh & list", text: "Publish the lot by weight, no haggling." },
+  { n: "03", title: "Accept the best bid", text: "Pickup gets scheduled on accept." },
+];
+const BUY_STEPS = [
+  { n: "01", title: "Browse live lots", text: "Real piles with detected materials." },
+  { n: "02", title: "Bid on value", text: "Offer against the live price band." },
+  { n: "03", title: "Track in command", text: "Every offer, one dashboard." },
+];
+
 export function RolesScene() {
   return (
     <Shell id="scene-roles" tall="h-[240vh]" label="Two doors, one network" className="bg-[linear-gradient(165deg,#F6EEDC,#E7D2A8)] text-[#132019]">
@@ -308,27 +319,60 @@ export function RolesScene() {
         const draw = windowed(p, 0.1, 0.6);
         return (
           <div className="relative">
-            <Giant stroke="rgba(20,32,25,0.14)">05</Giant>
+            {/* Watermark numeral parked top-right, clear of the cards */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-8 right-0 select-none font-display text-[30vw] font-bold leading-none tracking-tight sm:text-[9rem] lg:-top-12 lg:text-[10rem]"
+              style={{ color: "transparent", WebkitTextStroke: "2px rgba(20,32,25,0.14)" }}
+            >
+              05
+            </span>
             <p className="sr-only">Kabadiwalas sell through scan, operations and inbox. Vendors buy through market, bids and command center.</p>
             <div className="relative">
-              <h2 className="text-center font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
+              <p className="text-center font-display text-xs font-bold uppercase tracking-widest text-[#8A5A26]">Move 5 - Pick your door</p>
+              <h2 className="mt-2 text-center font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
                 Two doors, <span className="text-[#A05A1E]">one network</span>
               </h2>
               <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-[1fr_200px_1fr]">
                 <article
-                  className="flex flex-col rounded-2xl border-2 border-[#8A5A26] bg-[#0F3B2C] p-6 text-pcb-gold sm:p-8"
+                  className="relative flex flex-col overflow-hidden rounded-2xl border-2 border-[#8A5A26] bg-[#0F3B2C] p-6 text-pcb-gold sm:p-8"
                   style={{ opacity: windowed(p, 0.05, 0.25), transform: `translateX(${(1 - windowed(p, 0.05, 0.25)) * -60}px)` }}
                 >
-                  <h3 className="font-display text-xl font-bold uppercase text-pcb-accent">Kabadiwalas - sell</h3>
-                  <p className="mt-2 font-sans text-sm text-text-secondary">Scan scrap, publish lots by weight, accept the best offer from your inbox.</p>
-                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
-                    <Link href="/scan" className="underline underline-offset-4 hover:text-white">Scan</Link>
-                    <Link href="/dashboard" className="underline underline-offset-4 hover:text-white">Operations</Link>
-                    <Link href="/dashboard/inbox" className="underline underline-offset-4 hover:text-white">Inbox</Link>
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 opacity-70"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(rgba(184,115,51,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(184,115,51,0.10) 1px, transparent 1px)",
+                      backgroundSize: "28px 28px",
+                    }}
+                  />
+                  <div className="relative">
+                    <span className="inline-block rounded-full border border-pcb-accent/60 px-3 py-1 font-display text-[11px] font-bold uppercase tracking-widest text-pcb-accent">
+                      Door 01
+                    </span>
+                    <h3 className="mt-3 font-display text-xl font-bold uppercase text-pcb-accent">Kabadiwalas - sell</h3>
+                    <p className="mt-2 font-sans text-sm text-text-secondary">Scan scrap, publish lots by weight, accept the best offer from your inbox.</p>
+                    <ol className="mt-5 space-y-3 border-t border-pcb-copper/40 pt-5">
+                      {SELL_STEPS.map((s) => (
+                        <li key={s.n} className="flex gap-3">
+                          <span aria-hidden className="font-display text-sm font-bold text-pcb-accent">{s.n}</span>
+                          <div>
+                            <p className="font-sans text-sm font-bold text-pcb-gold">{s.title}</p>
+                            <p className="font-sans text-xs text-text-secondary">{s.text}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                    <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
+                      <Link href="/scan" className="underline underline-offset-4 hover:text-white">Scan</Link>
+                      <Link href="/dashboard" className="underline underline-offset-4 hover:text-white">Operations</Link>
+                      <Link href="/dashboard/inbox" className="underline underline-offset-4 hover:text-white">Inbox</Link>
+                    </div>
+                    <Link href="/auth/register" className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-pcb-accent px-6 font-sans font-bold text-black hover:brightness-90">
+                      Create seller account
+                    </Link>
                   </div>
-                  <Link href="/auth/register" className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-xl bg-pcb-accent px-6 font-sans font-bold text-black hover:brightness-90">
-                    Create seller account
-                  </Link>
                 </article>
                 <div className="hidden flex-col items-center justify-center lg:flex" aria-hidden="true">
                   <MascotSlot className="w-full max-w-[180px]" />
@@ -338,19 +382,43 @@ export function RolesScene() {
                   </svg>
                 </div>
                 <article
-                  className="flex flex-col rounded-2xl border-2 border-[#8A5A26] bg-[#FFFBF0] p-6 sm:p-8"
+                  className="relative flex flex-col overflow-hidden rounded-2xl border-2 border-[#8A5A26] bg-[#FFFBF0] p-6 sm:p-8"
                   style={{ opacity: windowed(p, 0.2, 0.25), transform: `translateX(${(1 - windowed(p, 0.2, 0.25)) * 60}px)` }}
                 >
-                  <h3 className="font-display text-xl font-bold uppercase text-[#A05A1E]">Vendors - buy</h3>
-                  <p className="mt-2 font-sans text-sm text-[#33463D]">Browse live lots with detected materials, bid, track every offer in one place.</p>
-                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
-                    <Link href="/vendor/market" className="underline underline-offset-4 hover:text-black">Market</Link>
-                    <Link href="/vendor/bids" className="underline underline-offset-4 hover:text-black">My bids</Link>
-                    <Link href="/vendor/dashboard" className="underline underline-offset-4 hover:text-black">Command</Link>
+                  <div className="relative">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-block rounded-full border border-[#8A5A26]/60 px-3 py-1 font-display text-[11px] font-bold uppercase tracking-widest text-[#8A5A26]">
+                        Door 02
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1E7A4C]/10 px-3 py-1 font-sans text-[11px] font-bold text-[#1E7A4C]">
+                        <svg aria-hidden width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M2 6.5l2.5 2.5L10 3.5" />
+                        </svg>
+                        Verified supply
+                      </span>
+                    </div>
+                    <h3 className="mt-3 font-display text-xl font-bold uppercase text-[#A05A1E]">Vendors - buy</h3>
+                    <p className="mt-2 font-sans text-sm text-[#33463D]">Browse live lots with detected materials, bid, track every offer in one place.</p>
+                    <ol className="mt-5 space-y-3 border-t border-[#8A5A26]/30 pt-5">
+                      {BUY_STEPS.map((s) => (
+                        <li key={s.n} className="flex gap-3">
+                          <span aria-hidden className="font-display text-sm font-bold text-[#A05A1E]">{s.n}</span>
+                          <div>
+                            <p className="font-sans text-sm font-bold text-[#132019]">{s.title}</p>
+                            <p className="font-sans text-xs text-[#5A6E63]">{s.text}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                    <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm font-bold">
+                      <Link href="/vendor/market" className="underline underline-offset-4 hover:text-black">Market</Link>
+                      <Link href="/vendor/bids" className="underline underline-offset-4 hover:text-black">My bids</Link>
+                      <Link href="/vendor/dashboard" className="underline underline-offset-4 hover:text-black">Command</Link>
+                    </div>
+                    <Link href="/auth/login" className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border-2 border-[#132019] px-6 font-sans font-bold hover:bg-[#132019]/5">
+                      Log in as vendor
+                    </Link>
                   </div>
-                  <Link href="/auth/login" className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-[#132019] px-6 font-sans font-bold hover:bg-[#132019]/5">
-                    Log in as vendor
-                  </Link>
                 </article>
               </div>
             </div>
