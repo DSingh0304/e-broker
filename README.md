@@ -3,20 +3,35 @@
 1. `Kabadiwala	+919876543210	kabadi123	Mohan Kumar → lands on /dashboard`
 2. `Vendor	+91123456000	vendor123	RecycleCorp India → lands on /vendor/dashboard`
 
-The AI broker that turns a photo of e-waste into money, safety, and compliance — before the kabadiwala leaves the doorstep.
+The AI broker that turns a photo of e-waste into money, safety, and compliance - before the kabadiwala leaves the doorstep.
 
 Next.js · FastAPI · YOLO26 · Amazon Bedrock · SageMaker
 
 > Most days, E-Broker says only one thing: fair price, safe handling, certified pickup. That's the point.
 
-E-Broker is an agentic marketplace for India's e-waste: a kabadiwala photographs scrap, YOLO26 identifies components, a Strands agent prices materials, warns on toxicity, generates an EPR passport, and routes the lot to certified recyclers — built to run entirely on AWS.
+E-Broker is an agentic marketplace for India's e-waste: a kabadiwala photographs scrap, YOLO26 identifies components, a Strands agent prices materials, warns on toxicity, generates an EPR passport, and routes the lot to certified recyclers - built to run entirely on AWS.
 
-Ramesh (Delhi) photographs a motherboard pile and speaks Hindi or Hinglish. Vendors bid in a live market. Admins review, correct, and promote better models. Families of small shops get one calm screen. They are notified only when a bid wins, a pickup is due, or something is hazardous — and only the person who can act is asked first.
+Ramesh (Delhi) photographs a motherboard pile and speaks Hindi or Hinglish. Vendors bid in a live market. Admins review, correct, and promote better models. Families of small shops get one calm screen. They are notified only when a bid wins, a pickup is due, or something is hazardous - and only the person who can act is asked first.
 
 Build story + architecture: `docs/ARCHITECTURE.md` · `docs/backend/`
 Agent runbook: `docs/backend/agent_plan.md` · `api/services/strands_agent.py`
 
-## The problem
+## The real problem: informal e-waste handling causes cancer
+
+India generates **3.2 million metric tonnes of e-waste every year** - the third largest in the world - and less than **5% reaches certified recyclers**. The rest is burned, acid-stripped, or dumped by informal handlers who have no way of knowing what they are touching.
+
+The consequences are not abstract. They are chemical, irreversible, and happening now:
+
+- **PCBs and motherboards burned in the open** release brominated flame retardants (BFRs) that produce dioxins - among the most potent carcinogens known to science, directly linked to lung cancer, liver cancer, and non-Hodgkin lymphoma.
+- **Batteries acid-stripped informally** leach lead and cadmium into groundwater. Lead has no safe exposure threshold and is classified as a Group 2A carcinogen by the IARC. Children in households near informal recycling sites show measurably elevated blood-lead levels.
+- **CRT monitors and older chips** contain hexavalent chromium and beryllium compounds - both Group 1 human carcinogens - that persist in soil and enter the food chain through crops irrigated with contaminated groundwater.
+- **Gold recovery via aqua regia** in backyard operations releases nitrogen dioxide fumes, a lung carcinogen, directly into residential air.
+
+The kabadiwala picking up your old laptop does not know which components are time bombs. Neither does the scrap yard that buys them. The formal system's answer - paper-based EPR compliance forms - never reaches the doorstep. **The hazard warning that could prevent cancer exposure is generated after the transaction, not before it.**
+
+E-Broker moves that warning to the only moment that matters: **before the item changes hands**.
+
+## The operational problem
 
 India's kabadiwalas price e-waste by eye. Vendors can't see supply. Recyclers get mixed, hazardous lots. EPR compliance is paperwork nobody can produce at the doorstep.
 
@@ -39,8 +54,8 @@ E-Broker is not a replacement for CPCB process. Recycler screens always surface 
 
 | Capability | Detail |
 |---|---|
-| Agentic scan companion | Photograph e-waste — detections, price bands, toxicity, EPR summary stream back; it doesn't only label boxes |
-| All-in-one marketplace memory | RDS PostgreSQL single schema: images, detections, labels, listings, bids, training runs, model versions, agent results — not a disposable chat blob |
+| Agentic scan companion | Photograph e-waste - detections, price bands, toxicity, EPR summary stream back; it doesn't only label boxes |
+| All-in-one marketplace memory | RDS PostgreSQL single schema: images, detections, labels, listings, bids, training runs, model versions, agent results - not a disposable chat blob |
 | Vision-first | YOLO26m, 9 unified classes, mAP50 0.802; dense PCB macros to whole phones in one taxonomy |
 | Continuous learning loop | Every admin approve / correct becomes training data; nightly threshold check opens a SageMaker job; regression gate blocks bad promotes |
 | Ask the seller first | Low-confidence or hazardous lot → seller sees hazard card and handling rules before any vendor is notified |
@@ -73,25 +88,25 @@ Kabadiwala / Vendor / Admin browser
    Amazon API Gateway HTTP API
    JWT for people · admin authorizer · HMAC for internal callbacks
         ▼
-   AWS Lambda — containers via Amazon ECR (arm64, Python 3.12, FastAPI + Mangum)
-        ├─ Public API  — /api/v1/{proxy+} — upload, detect, market, recyclers
-        ├─ Admin API   — /api/admin/{proxy+} — queue, labeller, models, stats
-        └─ Internal API — /api/internal/{proxy+} — training webhooks, metrics
+   AWS Lambda - containers via Amazon ECR (arm64, Python 3.12, FastAPI + Mangum)
+        ├─ Public API  - /api/v1/{proxy+} - upload, detect, market, recyclers
+        ├─ Admin API   - /api/admin/{proxy+} - queue, labeller, models, stats
+        └─ Internal API - /api/internal/{proxy+} - training webhooks, metrics
              │
-             ├─ Amazon Bedrock (Nova Pro) — Strands agent + judge
-             ├─ Amazon SageMaker — Training Jobs (H100) + Serverless Inference (A10G)
-             ├─ Amazon SQS — inference queue (decoupled upload → inference)
-             ├─ Amazon S3 — images + model artifacts (Object Lock, Glacier 90d)
-             ├─ Amazon RDS PostgreSQL 16 + RDS Proxy — single schema, JSONB boxes
-             └─ Amazon EventBridge (nightly) — approved-label threshold check
-   Amazon Cognito — kabadiwala / vendor / admin groups
+             ├─ Amazon Bedrock (Nova Pro) - Strands agent + judge
+             ├─ Amazon SageMaker - Training Jobs (H100) + Serverless Inference (A10G)
+             ├─ Amazon SQS - inference queue (decoupled upload → inference)
+             ├─ Amazon S3 - images + model artifacts (Object Lock, Glacier 90d)
+             ├─ Amazon RDS PostgreSQL 16 + RDS Proxy - single schema, JSONB boxes
+             └─ Amazon EventBridge (nightly) - approved-label threshold check
+   Amazon Cognito - kabadiwala / vendor / admin groups
    AWS Secrets Manager · SSM Parameter Store · KMS
    Amazon CloudWatch (logs, metrics, alarms, dashboard) · X-Ray · CloudTrail
 ```
 
 Design rules:
 
-- No silent model fallbacks — inference or agent failure surfaces as structured error in the UI.
+- No silent model fallbacks - inference or agent failure surfaces as structured error in the UI.
 - The model decides vision and judgement; code decides money and actions.
 - Safety cannot be switched off; hazardous lots always show handling rules.
 - Only `approved` / `corrected` labels ever train; `skipped` is permanently excluded.
@@ -123,7 +138,7 @@ Deep dive: `docs/ARCHITECTURE.md`.
 
 | Route | Audience | Purpose |
 |---|---|---|
-| `/` | Everyone | Landing — problem, how it works, architecture |
+| `/` | Everyone | Landing - problem, how it works, architecture |
 | `/scan` | Seller | Upload + camera capture + detection canvas |
 | `/result/[id]` | Seller | Component cards, price, hazard, agent insights, recyclers |
 | `/recyclers` | Everyone | CPCB recycler list + Leaflet map |
@@ -142,11 +157,11 @@ Deep dive: `docs/ARCHITECTURE.md`.
 ## Repository layout
 
 ```
-app/               Next.js 14 — landing, scan, result, dashboard, vendor, admin, auth proxy
+app/               Next.js 14 - landing, scan, result, dashboard, vendor, admin, auth proxy
 components/        scan, result, recyclers, admin (KonvaBoard, LabelCanvas, MetricsChart), brand, layout
 hooks/             useAgentStream (SSE), usePinProgress, useReducedMotion
 lib/               api client, auth, session, bbox-utils, constants, format, metalReference, training-sse
-api/               FastAPI — routers (public, auth, admin, agent, market, training),
+api/               FastAPI - routers (public, auth, admin, agent, market, training),
                    services (inference, model_manager, label_service, training_service,
                    strands_agent, strands_tools, agent_cache, storage), core (config,
                    metal_prices, database, security), Alembic, Dockerfiles
@@ -165,13 +180,13 @@ scripts/           E2E smoke, deploy and seed helpers
 
 ## Vision + agent detail
 
-**9-class taxonomy** (`ml/configs/unified_classes.json`): `battery · hard_drive · pcb · motherboard · ram · copper_cable · smartphone_device · chip · peripheral_other` — mapped from 27+ source classes across 5 datasets (15,991 images, ~80k instances). `battery=toxic`, `pcb/motherboard/ram/chip=gold value`.
+**9-class taxonomy** (`ml/configs/unified_classes.json`): `battery · hard_drive · pcb · motherboard · ram · copper_cable · smartphone_device · chip · peripheral_other` - mapped from 27+ source classes across 5 datasets (15,991 images, ~80k instances). `battery=toxic`, `pcb/motherboard/ram/chip=gold value`.
 
 **Training:** SageMaker Training Job, YOLO26m, 80 epochs, 640px, auto-batch, AdamW `lr0 0.001` + cosine, `patience 20`, hsv / mosaic / mixup / copy_paste aug, `workers 4`, `data.yaml` roots rewritten to the job volume, weights to `s3://ebroker-models/runs/`, metrics webhook to Internal Lambda.
 
 **Inference:** `ModelManager` (`YOLO` + `RLock` + atomic `reload` hot-swap) → `predict_detailed()` → `xyxyn` → conf filter → sort → per-class dedupe `IoU>0.5`, max 10/class, cap 50. Served from the Lambda container image + SageMaker Serverless A10G via SQS for burst.
 
-**Strands agent tools** (`api/services/strands_tools.py`): `get_scrap_price · assess_toxicity · find_recyclers · generate_epr_summary · get_exchange_rate · get_material_handling_rules` — static `PRICE_BANDS` (gold ₹13044/g Aug 2026), CPCB rules, Haversine geo-query. Strict-JSON system prompt, SSE `stream_agent_events()`, `status|tool_call|tool_result|result`.
+**Strands agent tools** (`api/services/strands_tools.py`): `get_scrap_price · assess_toxicity · find_recyclers · generate_epr_summary · get_exchange_rate · get_material_handling_rules` - static `PRICE_BANDS` (gold ₹13044/g Aug 2026), CPCB rules, Haversine geo-query. Strict-JSON system prompt, SSE `stream_agent_events()`, `status|tool_call|tool_result|result`.
 
 ## Deployed (Ship it)
 
@@ -246,4 +261,4 @@ Known gaps, on purpose for a hackathon: RDS Single-AZ (`t4g.micro`), no multi-re
 
 ## License
 
-MIT — see `LICENSE`.
+MIT - see `LICENSE`.
