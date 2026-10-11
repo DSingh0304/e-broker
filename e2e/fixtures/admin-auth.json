@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "ebroker_dev_admin",
+      "value": "1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 4102444800,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
