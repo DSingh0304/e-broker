@@ -252,11 +252,49 @@ export function SellScene() {
 
 /* ── Scene 4: Proof (count-up) ─────────────────────────────── */
 const STATS = [
-  { target: 0.802, decimals: 3, suffix: "", label: "mAP50 across 9 e-waste classes" },
-  { target: 15991, decimals: 0, suffix: "", label: "training images, YOLO26m fine-tune" },
-  { target: 18, decimals: 0, suffix: "", label: "recyclers seeded, CPCB-registered" },
-  { target: 3, decimals: 0, suffix: "", label: "moves from scrap pile to payout" },
+  { target: 0.802, decimals: 3, suffix: "", kind: "target" as const, label: "mAP50 detection score", detail: "YOLO26m · 9 e-waste classes · gated past 5% drops" },
+  { target: 15991, decimals: 0, suffix: "", kind: "layers" as const, label: "Training images unified", detail: "5 sources · Roboflow + lab sets · deduped" },
+  { target: 18, decimals: 0, suffix: "", kind: "shield" as const, label: "Recyclers on the network", detail: "CPCB-registered · geo-matched to the lot" },
+  { target: 3, decimals: 0, suffix: "", kind: "route" as const, label: "Moves to payout", detail: "Scan → price → accept · pickup scheduled" },
 ];
+
+function StatGlyph({ kind }: { kind: "target" | "layers" | "shield" | "route" }) {
+  const cls = "h-5 w-5 text-pcb-accent";
+  const stroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+  if (kind === "target") {
+    return (
+      <svg aria-hidden viewBox="0 0 24 24" className={cls} {...stroke}>
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+      </svg>
+    );
+  }
+  if (kind === "layers") {
+    return (
+      <svg aria-hidden viewBox="0 0 24 24" className={cls} {...stroke}>
+        <path d="M12 3l9 5-9 5-9-5 9-5z" />
+        <path d="M3.5 12.5L12 17l8.5-4.5" />
+        <path d="M3.5 16.5L12 21l8.5-4.5" />
+      </svg>
+    );
+  }
+  if (kind === "shield") {
+    return (
+      <svg aria-hidden viewBox="0 0 24 24" className={cls} {...stroke}>
+        <path d="M12 3l7 2.8v5.4c0 4.6-3.2 7.6-7 8.8-3.8-1.2-7-4.2-7-8.8V5.8L12 3z" />
+        <path d="M9.3 11.8l2 2 3.4-3.8" />
+      </svg>
+    );
+  }
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className={cls} {...stroke}>
+      <circle cx="6" cy="18" r="2.4" />
+      <circle cx="18" cy="6" r="2.4" />
+      <path d="M6 15.6V10a4 4 0 0 1 4-4h7.6" strokeDasharray="1 3" />
+    </svg>
+  );
+}
 
 function formatStat(v: number, decimals: number) {
   return decimals > 0
@@ -271,28 +309,41 @@ export function ProofScene() {
         <div className="relative">
           <Giant stroke="rgba(184,115,51,0.22)">04</Giant>
           <p className="sr-only">Model accuracy 0.802, 15991 training images, 18 recyclers, 3 moves to payout.</p>
-          <div className="relative">
-            <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Measured, not promised</p>
-            <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
-              A fine-tuned model, a verified network
-            </h2>
-            <dl aria-hidden="true" className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <div className="relative grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+            <div>
+              <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-green">Move 4 - Measured, not promised</p>
+              <h2 className="mt-2 font-display text-3xl font-bold uppercase sm:text-4xl lg:text-5xl">
+                A fine-tuned model, a verified network
+              </h2>
+              <p className="mt-4 hidden max-w-md font-sans text-sm leading-relaxed text-text-secondary sm:block sm:text-base">
+                Every number here is counted, not claimed - live weights, real
+                images, registered recyclers. Scroll and watch the ledger fill.
+              </p>
+              <div className="mt-4 flex items-center gap-3 sm:mt-6 sm:gap-4">
+                <div className="w-16 shrink-0 sm:w-28"><MascotSlot /></div>
+                <p className="font-sans text-xs leading-relaxed text-text-secondary sm:text-sm">
+                  Human-in-the-loop retraining runs on every approved label - see the{" "}
+                  <Link href="/admin/training" className="underline underline-offset-4 hover:text-pcb-gold">training pipeline</Link>.
+                </p>
+              </div>
+            </div>
+            <dl aria-hidden="true" className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
               {STATS.map((s, i) => {
                 const v = s.target * windowed(p, 0.05 + i * 0.18, 0.3);
                 return (
-                  <div key={s.label} className="rounded-2xl border border-pcb-copper/40 bg-black/25 p-6 lg:p-8">
-                    <dd className="font-display text-5xl font-bold text-pcb-gold tabular-nums lg:text-6xl">
+                  <div key={s.label} className="rounded-2xl border border-pcb-copper/40 bg-black/25 p-4 sm:p-6">
+                    <StatGlyph kind={s.kind} />
+                    <dd className="mt-2 font-display text-3xl font-bold text-pcb-gold tabular-nums sm:mt-3 sm:text-4xl lg:text-5xl">
                       {formatStat(v, s.decimals)}{s.suffix}
                     </dd>
-                    <dt className="mt-3 font-sans text-sm leading-snug text-text-secondary">{s.label}</dt>
+                    <dt className="mt-1 sm:mt-2">
+                      <span className="block font-sans text-[13px] font-bold text-pcb-gold/90 sm:text-sm">{s.label}</span>
+                      <span className="mt-1 block font-sans text-[11px] leading-snug text-text-secondary sm:text-xs">{s.detail}</span>
+                    </dt>
                   </div>
                 );
               })}
             </dl>
-            <p className="mt-6 font-sans text-sm text-text-secondary">
-              Human-in-the-loop retraining runs on every approved label - see the{" "}
-              <Link href="/admin/training" className="underline underline-offset-4 hover:text-pcb-gold">training pipeline</Link>.
-            </p>
           </div>
         </div>
       )}
