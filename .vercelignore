@@ -1,0 +1,23 @@
+# Files excluded from the Cloudflare Pages bundle (built via next-on-pages).
+# The Worker proxies /api/* to the backend over the tunnel at runtime,
+# so backend code, datasets and weights must not ship to the edge.
+api
+ml
+dataset
+data_processed
+data
+models
+runs
+logs
+venv
+.venv
+infra
+e2e
+__tests__
+.mypy_cache
+.ruff_cache
+.ollama_home
+.git
+test-results
+playwright-report
+*.zip

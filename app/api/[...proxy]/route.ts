@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 // Catch-all backend proxy: /api/* (except deeper routes like /api/auth/*,
 // which Next.js matches first) forwards to FastAPI. Replaces next.config
 // rewrites with a debuggable hop - upstream URL + status are logged and

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 // POST /api/auth/register - proxies to FastAPI so the browser never needs
 // the backend URL or internal keys. The NextAuth catch-all would otherwise
 // swallow this path with a 400.

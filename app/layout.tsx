@@ -4,6 +4,8 @@ import { Providers } from "@/components/Providers";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "E-Broker - Turn E-Waste Into Value",
   description: "Photograph. Identify. Price. Recycle.",

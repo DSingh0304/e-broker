@@ -40,3 +40,10 @@ playwright-report/
 # Terraform / TS artifacts
 .terraform/
 *.tsbuildinfo
+
+.dev.vars
+
+.playwright-mcp/
+
+.vercel/
+.wrangler/

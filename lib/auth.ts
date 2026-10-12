@@ -1,27 +1,29 @@
-import { getServerSession, type NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth, { type NextAuthConfig } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 
 const API_URL = process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
+  // Workers sit behind Cloudflare's proxy; trust forwarded host/proto so
+  // callbacks and cookies use the public domain.
+  trustHost: true,
   providers: [
-    CredentialsProvider({
+    Credentials({
       name: "Phone Login",
       credentials: {
         phone: { label: "Phone", type: "tel" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.phone || !credentials?.password) return null;
+        const phone = typeof credentials?.phone === "string" ? credentials.phone : "";
+        const password = typeof credentials?.password === "string" ? credentials.password : "";
+        if (!phone || !password) return null;
 
         try {
           const res = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              phone: credentials.phone,
-              password: credentials.password,
-            }),
+            body: JSON.stringify({ phone, password }),
           });
 
           if (!res.ok) return null;
@@ -62,10 +64,10 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET || "ebroker-local-dev-secret-change-in-prod",
+  secret:
+    process.env.AUTH_SECRET ||
+    process.env.NEXTAUTH_SECRET ||
+    "ebroker-local-dev-secret-change-in-prod",
 };
 
-export async function auth() {
-  const session = await getServerSession(authOptions);
-  return session;
-}
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
